@@ -1,1 +1,1 @@
-# amplify-workshop
+# AWS Amplify Workshop
