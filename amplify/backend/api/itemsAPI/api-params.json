@@ -1,0 +1,63 @@
+{
+    "paths": [
+        {
+            "name": "/info",
+            "lambdaFunction": "infoFunction",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET"
+                ]
+            }
+        },
+        {
+            "name": "/items",
+            "lambdaFunction": "databaseFunction",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "itemsAPI",
+    "apiName": "itemsAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "infoFunction"
+        },
+        {
+            "lambdaFunction": "databaseFunction"
+        }
+    ],
+    "privacy": {
+        "auth": 2,
+        "unauth": 0,
+        "authRoleName": "amplify-amplifyworkshop-dev-73123-authRole",
+        "unAuthRoleName": "amplify-amplifyworkshop-dev-73123-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "infoFunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "databaseFunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "161d6622"
+}

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: #eaeaea;
 }
 
 .App-logo {
@@ -35,4 +36,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.card {
+  width: 750px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+amplify-authenticator {
+  text-align: center;
+}
+
+.app {
+  text-align: left;
+}
+
+.navBarTitle {
+  flex-grow: 1
 }
