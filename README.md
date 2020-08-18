@@ -43,16 +43,39 @@ The architecture of these large, fully-fledged applications is fairly complicate
 
 3. Click 'Get Started'
 
-4. Choose a nam
+4. Choose a name (e.g. amplify-workshop). Click 'Next'. Under 'Instance Type' select 'Other instance type', and search for 't3.medium' in the dropdown search.
+
+5. Leave everything else as default, and click 'Create Environment'.
 
 ### Setting up your Amplify + React application
 
-1. Do a 'git clone' of the current repository
+1. Clone the current repository to your Cloud9 IDE. 
+   
    ```bash
    git clone
    ```
    
-2. Move into the directory
+2. Move into the cloned directory, and install all required packages. 
+
+   ```bash
+   cd amplify-workshop
+   npm install
+   ```
+   
+3. Install the Amplify CLI and initialise the project (as an Amplify app)
+   ```bash
+   npm install -g @aws-amplify/cli
+   amplify init
+   ```
+   
+4. Run the React application
+   ```bash
+   npm start
+   ```
+   
+5. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
+
+You should see a basic React web application running in your browser! 
 
 
 ## Adding In-App Authentication
