@@ -35,24 +35,69 @@ The architecture of these large, fully-fledged applications is fairly complicate
 
 ## Setting up your Development Environment
 
+### Provisioning a Cloud 9
+
 1. Goto your AWS console via this link: https://aws.amazon.com/
 
+2. Search up and click Cloud 9 in the 'Services' section.
 
-2. Provision a new Cloud9 instance by 
+3. Click 'Get Started'
+
+4. Choose a nam
+
+### Setting up your Amplify + React application
+
+1. Do a 'git clone' of the current repository
+   ```bash
+   git clone
+   ```
+   
+2. Move into the directory
 
 
 ## Adding In-App Authentication
 
-Cognito
+1. Run the following command: 
+
+    ```bash
+    amplify auth add
+    ```
+    
+2. 
 
 ## Connecting to your Backend API
 
-Api Gateway
-Lambda
+1. Run the following command: 
+
+    ```bash
+    amplify api add
+    ```
 
 ## Connecting to a Database
 
-DynamoDB
+1. Run the following command: 
+
+    ```bash
+    amplify storage add
+    ```
+    
+2. Run the following command: 
+
+    ```bash
+    amplify function add
+    ```
+
+3. Run the following command: 
+
+    ```bash
+    amplify api update
+    ```
 
 ## Adding Machine Learning Features
+
+1. Run the following command: 
+
+    ```bash
+    amplify predictions add
+    ```
 
