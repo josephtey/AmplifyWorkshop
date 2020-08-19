@@ -30,7 +30,7 @@ The architecture of these large, fully-fledged applications is fairly complicate
 
 2. **Serverless**: All of the services I will show you today are **serverless**. Of course, they still run on servers - it's just that YOU don't have to manage or maintain these servers, as AWS handles everything. Since you don't have to care about these servers, such services are deemed 'serverless' from a consumer perspective.  
 
-3. **Connecting these services**: And ultimately, rather than building, configuring and deploying each component manually before hooking them all together, AWS Amplify drastically simplifies and speeds up this process. It allows you to provision up a full-stack web/mobile application, with an API, backend, authentication, database, storage + more within MINUTES!
+3. **Using AWS Amplify**: And ultimately, rather than building, configuring and deploying each component manually before hooking them all together, AWS Amplify drastically simplifies and speeds up this process. It allows you to provision up a full-stack web/mobile application, with an API, backend, authentication, database, storage + more within MINUTES!
 
 
 ## Setting up your Development Environment
@@ -79,14 +79,25 @@ You should see a basic React web application running in your browser!
 
 
 ## Adding In-App Authentication
+AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
 
-1. Run the following command: 
+In this section, we will add a log-in and sign-up page, as well as a sign-out button. 
+
+1. To add authentication to your Amplify project, run the following command, and follow the guided instructions. 
 
     ```bash
     amplify auth add
-    ```
     
-2. 
+    Do you want to use the default authentication and security configuration? Default configuration
+    How do you want users to be able to sign in? Username
+    Do you want to configure advanced settings?  No, I am done.
+    ```    
+    
+2. To push it to the Cloud, run the following command: 
+
+   ```bash
+   amplify push
+   ```
 
 ## Connecting to your Backend API
 
