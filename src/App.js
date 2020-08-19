@@ -8,11 +8,13 @@ import NavBar from './components/NavBar'
 import AddItemCard from './components/AddItemCard'
 import AboutCard from './components/AboutCard'
 
+
 function App() {
 
   const [aboutInfo, setAboutInfo] = useState()
   const [userTasks, setUserTasks] = useState([])
   const [refresh, setRefresh] = useState(false)
+
 
   Hub.listen('auth', (data) => {
     if (data.payload.event === 'signIn') {
@@ -22,7 +24,9 @@ function App() {
 
   useEffect(() => {
     fetchData()
+
   }, [refresh])
+
 
   async function fetchData() {
     const about = await getAboutInfo()
@@ -39,10 +43,6 @@ function App() {
           await Auth.signOut();
         }}
       />
-      
-      <div className="card">
-        
-      </div>
       
       <AboutCard 
         text={aboutInfo}
