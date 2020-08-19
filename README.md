@@ -1,68 +1,137 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Build a Fullstack + Serverless Web App using AWS Amplify 
 
-## Available Scripts
+Welcome! This is a beginner workshop targetted at University students (studying IT / Computer Science) who are new to Amazon Web Services. The main question we seek to answer by the end of this workshop is: 
 
-In the project directory, you can run:
+`How can I use AWS to enhance my own personal projects?`
 
-### `npm start`
+To answer this question, we will focus on using AWS to supercharge **web development**, specifically by:
+1. Explaining the **benefits** of using AWS to build web applications.
+2. Providing a high-level overview of key AWS services, including Lambda, S3, Cognito, API gateway, etc. 
+3. Using AWS Amplify to seamlessly connect a range of AWS services to produce a fullstack, serverless web application. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+We hope that by the end of this workshop, you will not only be confident using AWS in your own projects, but you will realise the vast range of possibilities the AWS Cloud has to offer.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Table of Contents: 
+* [Introduction to Workshop](#workshop-theory)
+* [Setting up your Development Environment](#setting-up-your-development-environment)
+* [Adding In-App Authentication]
+* [Connecting to your Backend API]
+* [Connecting to a Database]
+* [Adding Machine Learning Features]
 
-### `npm test`
+## Workshop Theory
+As a University student, you may have had some experience creating small, mini applications as part of your assessments - for example, random websites, algorithmic chunks of code, or just random python scripts. But you may be wondering, how are industrial, fully-fledged applications, such as Facebook, Google or even Github, actually built? 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### What is the architecture of a traditional application? 
+The architecture of these large, fully-fledged applications is fairly complicated, and consist of so many different components responsible for different tasks. 
 
-### `npm run build`
+### How do you build applications in the cloud? 
+1. **Services**: The different components of an application correspond to different AWS services. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Serverless**: All of the services I will show you today are **serverless**. Of course, they still run on servers - it's just that YOU don't have to manage or maintain these servers, as AWS handles everything. Since you don't have to care about these servers, such services are deemed 'serverless' from a consumer perspective.  
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+3. **Using AWS Amplify**: And ultimately, rather than building, configuring and deploying each component manually before hooking them all together, AWS Amplify drastically simplifies and speeds up this process. It allows you to provision up a full-stack web/mobile application, with an API, backend, authentication, database, storage + more within MINUTES!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Setting up your Development Environment
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Provisioning a Cloud 9
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Goto your AWS console via this link: https://aws.amazon.com/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. Search up and click Cloud 9 in the 'Services' section.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. Click 'Get Started'
 
-## Learn More
+4. Choose a name (e.g. amplify-workshop). Click 'Next'. Under 'Instance Type' select 'Other instance type', and search for 't3.medium' in the dropdown search.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. Leave everything else as default, and click 'Create Environment'.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Setting up your Amplify + React application
 
-### Code Splitting
+1. Clone the current repository to your Cloud9 IDE. 
+   
+   ```bash
+   git clone
+   ```
+   
+2. Move into the cloned directory, and install all required packages. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+   ```bash
+   cd amplify-workshop
+   npm install
+   ```
+   
+3. Install the Amplify CLI and initialise the project (as an Amplify app)
+   ```bash
+   npm install -g @aws-amplify/cli
+   amplify init
+   ```
+   
+4. Run the React application
+   ```bash
+   npm start
+   ```
+   
+5. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
-### Analyzing the Bundle Size
+You should see a basic React web application running in your browser! 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
+## Adding In-App Authentication
+AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+In this section, we will add a log-in and sign-up page, as well as a sign-out button. 
 
-### Advanced Configuration
+1. To add authentication to your Amplify project, run the following command, and follow the guided instructions. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+    ```bash
+    amplify auth add
+    
+    Do you want to use the default authentication and security configuration? Default configuration
+    How do you want users to be able to sign in? Username
+    Do you want to configure advanced settings?  No, I am done.
+    ```    
+    
+2. To push it to the Cloud, run the following command: 
 
-### Deployment
+   ```bash
+   amplify push
+   ```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Connecting to your Backend API
 
-### `npm run build` fails to minify
+1. Run the following command: 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    ```bash
+    amplify api add
+    ```
+
+## Connecting to a Database
+
+1. Run the following command: 
+
+    ```bash
+    amplify storage add
+    ```
+    
+2. Run the following command: 
+
+    ```bash
+    amplify function add
+    ```
+
+3. Run the following command: 
+
+    ```bash
+    amplify api update
+    ```
+
+## Adding Machine Learning Features
+
+1. Run the following command: 
+
+    ```bash
+    amplify predictions add
+    ```
+
