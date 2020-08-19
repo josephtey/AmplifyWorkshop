@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { TextField, Button } from '@material-ui/core';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const NavBar = ({
-    addAction
+  addAction
 }) => {
 
-    const [taskName, setTaskName] = useState()
+  const [taskName, setTaskName] = useState()
 
-    return (
-        <div className="card">
+  return (
+    <div className="card">
           <TextField
             label="Task"
             variant="outlined"
@@ -25,7 +25,8 @@ const NavBar = ({
             variant="contained" 
             color="primary"
             onClick={()=>{
-              addAction(taskName)
+              const id = uuidv4();
+              addAction(id, taskName)
             }}
           >
             Add
@@ -33,7 +34,7 @@ const NavBar = ({
         </div>
         <div style={{clear: 'both'}} />
         </div>
-    )
+  )
 }
 
 export default NavBar

@@ -21,7 +21,7 @@
             "dependsOn": [
                 {
                     "category": "storage",
-                    "resourceName": "itemsTable",
+                    "resourceName": "itemsDB",
                     "attributes": [
                         "Name",
                         "Arn"
@@ -59,9 +59,16 @@
         }
     },
     "storage": {
-        "itemsTable": {
+        "itemsDB": {
             "service": "DynamoDB",
             "providerPlugin": "awscloudformation"
+        }
+    },
+    "hosting": {
+        "amplifyhosting": {
+            "service": "amplifyhosting",
+            "providerPlugin": "awscloudformation",
+            "type": "manual"
         }
     }
 }

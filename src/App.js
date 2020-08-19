@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { API, Hub } from 'aws-amplify';
+import { Hub, Auth } from 'aws-amplify'
 
 import { getAboutInfo, getUserTasks, removeTask, addTask } from './api/db'
 import TableCard from './components/TableCard'
@@ -15,10 +15,14 @@ function App() {
   const [refresh, setRefresh] = useState(false)
 
   Hub.listen('auth', (data) => {
-    if (data.payload.event == 'signIn') {
+    if (data.payload.event === 'signIn') {
       setRefresh(!refresh)
     }
   });
+
+  useEffect(() => {
+    fetchData()
+  }, [refresh])
 
   async function fetchData() {
     const about = await getAboutInfo()
@@ -28,34 +32,36 @@ function App() {
     setUserTasks(tasks)
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [refresh])
-
   return (
     <div className="app">
-      <NavBar />
+      <NavBar 
+        logoutAction={async ()=>{
+          await Auth.signOut();
+        }}
+      />
+      
+      <div className="card">
+        
+      </div>
       
       <AboutCard 
         text={aboutInfo}
       />
       
       <AddItemCard 
-        addAction={(taskName)=>{
-          addTask(taskName)
+        addAction={(id, itemName)=>{
+          addTask(id, itemName)
           setRefresh(!refresh)
         }}  
       />
       
       <TableCard 
         data={userTasks}
-        removeAction={(taskName)=>{
-          removeTask(taskName)
+        removeAction={(id)=>{
+          removeTask(id)
           setRefresh(!refresh)
         }}
       />
-      
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     </div>
   );
 }

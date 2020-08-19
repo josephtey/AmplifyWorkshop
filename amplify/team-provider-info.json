@@ -14,6 +14,12 @@
         "categories": {
             "auth": {
                 "amplifyworkshop0047632a": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2jld5htjwnhsz",
+                    "type": "manual"
+                }
             }
         }
     }

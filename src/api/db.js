@@ -14,22 +14,23 @@ export async function getUserTasks() {
     return data
 }
 
-export async function addTask(taskName) {
+export async function addTask(id, itemName) {
     const userData = await Auth.currentAuthenticatedUser()
 
     const response = await API.post('itemsAPI', '/items', {
         body: {
+            id,
             user: userData.username,
-            taskName
+            itemName
         }
     })
 
     return response
 }
 
-export async function removeTask(taskName) {
+export async function removeTask(id) {
     const userData = await Auth.currentAuthenticatedUser()
-    const response = await API.del('itemsAPI', '/items/object/' + userData.username + '/' + taskName, {})
+    const response = await API.del('itemsAPI', '/items/object/' + userData.username + '/' + id, {})
 
     return response
 }

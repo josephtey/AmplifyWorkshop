@@ -1,7 +1,7 @@
 {
-    "tableName": "itemsTable",
+    "tableName": "itemsDB",
     "partitionKeyName": "user",
     "partitionKeyType": "S",
-    "sortKeyName": "taskName",
+    "sortKeyName": "id",
     "sortKeyType": "S"
 }

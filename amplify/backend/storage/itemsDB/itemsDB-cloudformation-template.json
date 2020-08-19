@@ -45,7 +45,7 @@
                   }  , 
                   
                   {
-                      "AttributeName": "taskName",
+                      "AttributeName": "id",
                       "AttributeType": "S"
                   } 
                   
@@ -58,7 +58,7 @@
                   }  , 
                   
                   {
-                    "AttributeName": "taskName",
+                    "AttributeName": "id",
                     "KeyType": "RANGE"
                   } 
                   

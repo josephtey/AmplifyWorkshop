@@ -4,11 +4,11 @@ import { Typography, Table, TableHead, TableRow, TableCell, TableBody, IconButto
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const TableCard = ({
-    data,
-    removeAction
+  data,
+  removeAction
 }) => {
-    return (
-        <div className="card">
+  return (
+    <div className="card">
         {data.length > 0 ?
           <Table>
           <TableHead>
@@ -22,11 +22,11 @@ const TableCard = ({
               return (
                 <TableRow>
                   <TableCell>
-                    {task.taskName}
+                    {task.itemName}
                   </TableCell>
                   <TableCell align="right">
                     <IconButton
-                      onClick={()=>removeAction(task.taskName)}
+                      onClick={()=>removeAction(task.id)}
                     > 
                       <DeleteIcon />
                     </IconButton>
@@ -39,7 +39,7 @@ const TableCard = ({
         </Table>
       : <Typography>You have not created any tasks</Typography>}
       </div>
-    )
+  )
 }
 
 export default TableCard
