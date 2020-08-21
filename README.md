@@ -124,7 +124,7 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
 
 There are two steps to adding authentication:
 1. Provisioning the Authentication service (AWS Cognito)
-2. Connecting thee service to your web application
+2. Connecting the Authentication service to your Web App
 
 ### Provisioning the Authentication service (AWS Cognito)
 
