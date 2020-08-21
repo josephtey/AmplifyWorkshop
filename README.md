@@ -13,7 +13,7 @@ We hope that by the end of this workshop, you will not only be confident using A
 
 Table of Contents: 
 * [Introduction to Workshop](#workshop-theory)
-   * [Traditional Fullstack Web Applications](#what-is-the-architecture-of-a-traditional-application?)
+   * [Traditional Fullstack Web Applications](#Traditional-Fullstack-Web-Applications)
    * Cloud-Native Fullstack Web Applications
 * [Setting up your Development Environment](#setting-up-your-development-environment)
 * [Adding In-App Authentication]
@@ -24,7 +24,7 @@ Table of Contents:
 ## Workshop Theory
 As a University student, you may have had some experience creating small, mini applications as part of your assessments - for example, random websites, algorithmic chunks of code, or just random python scripts. But you may be wondering, how are industrial, fully-fledged applications, such as Facebook, Google or even Github, actually built? 
 
-### What is the architecture of a traditional application? 
+### Traditional Fullstack Web Applications
 ![traditional-architecture](img/Slide1.png)
 
 As seen in the diagram above, the architecture of fully-fledged web applications is fairly complicated, and consist of so many different components responsible for different tasks. 
