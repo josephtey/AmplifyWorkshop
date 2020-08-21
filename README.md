@@ -25,7 +25,12 @@ As a University student, you may have had some experience creating small, mini a
 ### What is the architecture of a traditional application? 
 The architecture of these large, fully-fledged applications is fairly complicated, and consist of so many different components responsible for different tasks. 
 
+[insert diagram of full stack app architecture]
+
 ### How do you build applications in the cloud? 
+
+[insert diagram of full stack app architecture, with CLOUD services]
+
 1. **Services**: The different components of an application correspond to different AWS services. 
 
 2. **Serverless**: All of the services I will show you today are **serverless**. Of course, they still run on servers - it's just that YOU don't have to manage or maintain these servers, as AWS handles everything. Since you don't have to care about these servers, such services are deemed 'serverless' from a consumer perspective.  
