@@ -99,9 +99,9 @@ We will be using AWS Amplify to build our fullstack, cloud-native web applicatio
    amplify init
    ```
    
-4. To connect your React web app to Amplify, open the file `src/index.js` add the following code after your imports:
+4. To connect your React web app to Amplify, open the file `src/index.js`, and add the following code:
 
-   `src/index.js`
+   In `src/index.js`, **after the import statements**:
    
    ```javascript
    import Amplify from 'aws-amplify'
@@ -113,15 +113,20 @@ We will be using AWS Amplify to build our fullstack, cloud-native web applicatio
    npm start
    ```
    
-6. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
+6. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
+   Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
-You should see a basic React web application running in your browser! 
+**You should see a basic React web application running in your browser!**
 
 
 ## Adding In-App Authentication
 AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
 
-In this section, we will add a log-in and sign-up page, as well as a sign-out button. 
+There are two steps to adding authentication:
+1. Provisioning the Authentication service (AWS Cognito)
+2. Connecting thee service to your web application
+
+### Provisioning the Authentication service (AWS Cognito)
 
 1. To add authentication to your Amplify project, run the following command, and follow the guided instructions.
 
@@ -152,6 +157,8 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    
    Click on 'Users and Groups' under 'General Settings' on the left sidebar - this is where you can track and manage your application's users. Currently, you have no users. 
    
+### Connecting the Authentication service to your Web App
+
 4. Although our authentication service has been provisioned, we still need to add a login / signup page in our application.
 
    To do this, open the file `src/index.js`, and import the Authenticator module by adding the following code:
