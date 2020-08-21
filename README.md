@@ -80,26 +80,26 @@ We will be using AWS Amplify to build our fullstack, cloud-native web applicatio
 
 ### Setting up your Amplify + React application
 
-**1. Clone the current repository to your Cloud9 IDE.8**
+1. Clone the current repository to your Cloud9 IDE.8
    
    ```bash
    git clone
    ```
    
-**2. Move into the cloned directory, and install all required packages.** 
+2. Move into the cloned directory, and install all required packages. 
 
    ```bash
    cd amplify-workshop
    npm install
    ```
    
-**3. Install the Amplify CLI and initialise the project (as an Amplify app)**
+3. Install the Amplify CLI and initialise the project (as an Amplify app)
    ```bash
    npm install -g @aws-amplify/cli
    amplify init
    ```
    
-**4. To connect your React web app to Amplify, open the file `src/index.js` add the following code after your imports:**
+4. To connect your React web app to Amplify, open the file `src/index.js` add the following code after your imports:
 
    `src/index.js`
    
@@ -108,7 +108,7 @@ We will be using AWS Amplify to build our fullstack, cloud-native web applicatio
    Amplify.configure(config)
    ```
 
-**5. Run the React application**
+5. Run the React application
    ```bash
    npm start
    ```
@@ -123,7 +123,7 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
 
 In this section, we will add a log-in and sign-up page, as well as a sign-out button. 
 
-**1. To add authentication to your Amplify project, run the following command, and follow the guided instructions.**
+1. To add authentication to your Amplify project, run the following command, and follow the guided instructions.
 
     ```bash
     amplify auth add
@@ -133,7 +133,7 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
     Do you want to configure advanced settings?  No, I am done.
     ```    
     
-**2. To push it to the Cloud, run the following command:**
+2. To push it to the Cloud, run the following command:
 
    ```bash
    amplify push
@@ -141,7 +141,7 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    
    You should see a 'status' section with 'auth' as a new component that you just created. Type 'Y' and hit enter to confirm this process.
    
-**3. Congrats! Your authentication service has been created. Let's take a look at this in the Amazon Console.**
+3. Congrats! Your authentication service has been created. Let's take a look at this in the Amazon Console.
   
    Open the AWS console: https://console.aws.amazon.com/console/home
    Search up 'Cognito' in the main catalog search bar, and click the first option.
@@ -152,7 +152,7 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    
    Click on 'Users and Groups' under 'General Settings' on the left sidebar - this is where you can track and manage your application's users. Currently, you have no users. 
    
-**4. Although our authentication service has been provisioned, we still need to add a login / signup page in our application.**
+4. Although our authentication service has been provisioned, we still need to add a login / signup page in our application.
 
    To do this, open the file `src/index.js`, and import the Authenticator module by adding the following code:
    
@@ -168,13 +168,13 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
     </AmplifyAuthenticator>
     ```
     
-**5. Open the tab where your application is being previewed. You should now see a login screen!**
+5. Open the tab where your application is being previewed. You should now see a login screen!
    
    Follow the instructions to make an account, verify your email, and then login. 
    
    Access the Cognito dashboard in the AWS Console (https://console.aws.amazon.com/console/home), click 'Users and Groups', and you should see the user account you just created!
    
-**Congrats! You have just set up an Authentication service, and connected it to your web application. **
+**Congrats! You have just set up an Authentication service, and connected it to your web application.** 
 
 ## Sending data between Frontend and Backend
 
