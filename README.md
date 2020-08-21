@@ -38,18 +38,29 @@ A few challenges / issues associated with this:
 1. With so many different components, it's tedious and time-consuming to manually provision ALL components, configure them, before connecting them all together to build a single application. 
 2. Each component needs to run on a server (a computer) - this could be expensive to run over long periods of time AND to maintain. 
 
-The solution: Amazon Web Services. 
+The solution: **Amazon Web Services**! 
 
 ### How do you build applications in the cloud? 
 
 ![cloud-architecture](img/Slide2.png)
 
-1. **Services**: As seen in the diagram above, the different components of an application correspond to different AWS services. 
+Building cloud-native fullstack web applications have several benefits:
 
-2. **Serverless**: All of the services I will show you today are **serverless**. Of course, they still run on servers - it's just that YOU don't have to manage or maintain these servers, as AWS handles everything. Since you don't have to care about these servers, such services are deemed 'serverless' from a consumer perspective.  
+1. **Services**: As seen in the diagram above, the different components of an application correspond to different AWS services. Rather than building your own components from scratch, AWS provides a range of services to supercharge your web applications. 
 
-3. **Using AWS Amplify**: And ultimately, rather than building, configuring and deploying each component manually before hooking them all together, AWS Amplify drastically simplifies and speeds up this process. It allows you to provision up a full-stack web/mobile application, with an API, backend, authentication, database, storage + more within MINUTES!
+   1. **AWS S3**: A file storage service - can be used for hosting your frontend website, as well as other files / attachments. 
+   2. **AWS Cognito**: An authentication service - handles user registration, authentication, stores data about all your users + more. 
+   3. **AWS API Gateway**: Acts as the 'front door' for websites to access data, business logic, and other functionality from your backend. 
+   4. **AWS Lambda**: Lets you run code (in the backend) without provisoning or mangaging servers. 
+   5. **AWS DynamoDB**: A noSQL database solution, that lets you store data without provisoning or mangaging servers. 
 
+2. **Serverless**: All of the services in the above diagram are 'serverless'. This does not mean that they do not run on servers (everything has to be run on a computer), but it means that: 
+   1. You don't have to manage or maintain these servers - Amazon takes care of everything. 
+   2. You only pay for what you use - it's a LOT cheaper. 
+
+3. **Using AWS Amplify**: While AWS provides all these services to build a web application, a developer must still manually configure and connect all these services together. However, **AWS Amplify** is a framework that allows you to automatically provision and connect ALL these services in literally minutes. Each service is treated like a plug-and-play module, rapidly speeding up the process of web application development. 
+
+We will be using AWS Amplify to build our fullstack, cloud-native web application today!
 
 ## Setting up your Development Environment
 
