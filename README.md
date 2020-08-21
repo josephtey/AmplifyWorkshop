@@ -99,12 +99,20 @@ We will be using AWS Amplify to build our fullstack, cloud-native web applicatio
    amplify init
    ```
    
-4. Run the React application
+4. To connect your React web app to Amplify, open the file `src/index.js` add the following code after your imports:
+  
+  src/index.js
+  ```javascript
+  import Amplify from 'aws-amplify'
+  Amplify.configure(config)
+  ```
+   
+5. Run the React application
    ```bash
    npm start
    ```
    
-5. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
+6. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
 You should see a basic React web application running in your browser! 
 
@@ -130,7 +138,42 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    amplify push
    ```
    
+   You should see a 'status' section with 'auth' as a new component that you just created. Type 'Y' and hit enter to confirm this process.
    
+3. Congrats! Your authentication service has been created. Let's take a look at this in the Amazon Console. 
+  
+   Open the AWS console: https://console.aws.amazon.com/console/home
+   Search up 'Cognito' in the main catalog search bar, and click the first option.
+   Click 'Manage user pools'.
+   Click your Amplify project.
+   
+   This is where you can edit the settings of your application's authentication service. Feel free to explore the different settings you can adjust. 
+   
+   Click on 'Users and Groups' under 'General Settings' on the left sidebar - this is where you can track and manage your application's users. Currently, you have no users. 
+   
+4. Although our authentication service has been provisioned, we still need to add a login / signup page in our application. 
+
+   To do this, open the file `src/index.js`, and import the Authenticator module by adding the following code:
+   
+   ```javascript
+   import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
+   ```
+   
+   In the same file, surround the `<App />` tag with the `<AmplifyAuthenticator>` tag. It should look like this:
+   
+   ```javascript
+    <AmplifyAuthenticator>
+      <App />
+    </AmplifyAuthenticator>
+    ```
+    
+5. Open the tab where your application is being previewed. You should now see a login screen!
+   
+   Follow the instructions to make an account, verify your email, and then login. 
+   
+   Access the Cognito dashboard in the AWS Console (https://console.aws.amazon.com/console/home), click 'Users and Groups', and you should see the user account you just created!
+   
+Congrats! You have just set up an Authentication service, and connected it to your web application. 
 
 ## Sending data between Frontend and Backend
 
