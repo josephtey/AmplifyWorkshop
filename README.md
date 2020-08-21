@@ -17,7 +17,7 @@ Table of Contents:
    * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
 * [Setting up your Development Environment](#setting-up-your-development-environment)
 * [Adding In-App Authentication]
-* [Connecting to your Backend API]
+* [Sending data between Frontend and Backend]
 * [Connecting to a Database]
 * [Adding Machine Learning Features]
 
@@ -130,7 +130,7 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    amplify push
    ```
 
-## Connecting to your Backend API
+## Sending data between Frontend and Backend
 
 1. Run the following command: 
 
