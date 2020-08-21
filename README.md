@@ -100,13 +100,14 @@ We will be using AWS Amplify to build our fullstack, cloud-native web applicatio
    ```
    
 4. To connect your React web app to Amplify, open the file `src/index.js` add the following code after your imports:
-  
-  src/index.js
-  ```javascript
-  import Amplify from 'aws-amplify'
-  Amplify.configure(config)
-  ```
+
+   `src/index.js`
    
+   ```javascript
+   import Amplify from 'aws-amplify'
+   Amplify.configure(config)
+   ```
+
 5. Run the React application
    ```bash
    npm start
