@@ -14,7 +14,7 @@ We hope that by the end of this workshop, you will not only be confident using A
 Table of Contents: 
 * [Introduction to Workshop](#workshop-theory)
    * [Traditional Fullstack Web Applications](#Traditional-Fullstack-Web-Applications)
-   * Cloud-Native Fullstack Web Applications
+   * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
 * [Setting up your Development Environment](#setting-up-your-development-environment)
 * [Adding In-App Authentication]
 * [Connecting to your Backend API]
@@ -42,7 +42,7 @@ A few challenges / issues associated with this:
 
 The solution: **Amazon Web Services**! 
 
-### How do you build fullstack applications in the cloud? 
+### Cloud Native Fullstack Web Applications
 
 ![cloud-architecture](img/Slide2.png)
 
