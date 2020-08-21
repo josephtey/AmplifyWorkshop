@@ -80,7 +80,7 @@ We will be using AWS Amplify to build our fullstack, cloud-native web applicatio
 
 ### Setting up your Amplify + React application
 
-**1. Clone the current repository to your Cloud9 IDE. **
+**1. Clone the current repository to your Cloud9 IDE.8**
    
    ```bash
    git clone
@@ -133,7 +133,7 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
     Do you want to configure advanced settings?  No, I am done.
     ```    
     
-**2. To push it to the Cloud, run the following command: **
+**2. To push it to the Cloud, run the following command:**
 
    ```bash
    amplify push
@@ -141,7 +141,7 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    
    You should see a 'status' section with 'auth' as a new component that you just created. Type 'Y' and hit enter to confirm this process.
    
-**3. Congrats! Your authentication service has been created. Let's take a look at this in the Amazon Console. **
+**3. Congrats! Your authentication service has been created. Let's take a look at this in the Amazon Console.**
   
    Open the AWS console: https://console.aws.amazon.com/console/home
    Search up 'Cognito' in the main catalog search bar, and click the first option.
@@ -152,7 +152,7 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    
    Click on 'Users and Groups' under 'General Settings' on the left sidebar - this is where you can track and manage your application's users. Currently, you have no users. 
    
-**4. Although our authentication service has been provisioned, we still need to add a login / signup page in our application. **
+**4. Although our authentication service has been provisioned, we still need to add a login / signup page in our application.**
 
    To do this, open the file `src/index.js`, and import the Authenticator module by adding the following code:
    
