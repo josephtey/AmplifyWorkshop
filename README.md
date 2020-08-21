@@ -129,6 +129,8 @@ In this section, we will add a log-in and sign-up page, as well as a sign-out bu
    ```bash
    amplify push
    ```
+   
+   
 
 ## Sending data between Frontend and Backend
 
