@@ -13,10 +13,12 @@ We hope that by the end of this workshop, you will not only be confident using A
 
 Table of Contents: 
 * [Introduction to Workshop](#workshop-theory)
-   * [Traditional Fullstack Web Applications](#Traditional-Fullstack-Web-Applications)
-   * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
+  * [Traditional Fullstack Web Applications](#Traditional-Fullstack-Web-Applications)
+  * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
 * [Setting up your Development Environment](#setting-up-your-development-environment)
-* [Adding In-App Authentication]
+* [Adding In-App Authentication](#Adding-In-App-Authentication)
+  * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-(AWS-Cognito))
+  * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
 * [Sending data between Frontend and Backend]
 * [Connecting to a Database]
 * [Adding Machine Learning Features]
