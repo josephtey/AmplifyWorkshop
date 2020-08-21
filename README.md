@@ -52,7 +52,7 @@ Building cloud-native fullstack web applications have several benefits:
    2. **AWS Cognito**: An authentication service - handles user registration, authentication, stores data about all your users + more. 
    3. **AWS API Gateway**: Acts as the 'front door' for websites to access data, business logic, and other functionality from your backend. 
    4. **AWS Lambda**: Lets you run code (in the backend) without provisoning or mangaging servers. 
-   5. **AWS DynamoDB**: A noSQL database solution, that lets you store data without provisoning or mangaging servers. 
+   5. **AWS DynamoDB**: A database solution that lets you store data without provisoning or mangaging servers. 
 
 2. **Serverless**: All of the services in the above diagram are 'serverless'. This does not mean that they do not run on servers (everything has to be run on a computer), but it means that: 
    1. You don't have to manage or maintain these servers - Amazon takes care of everything. 
