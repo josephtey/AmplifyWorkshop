@@ -25,11 +25,11 @@ As a University student, you may have had some experience creating small, mini a
 ### What is the architecture of a traditional application? 
 The architecture of these large, fully-fledged applications is fairly complicated, and consist of so many different components responsible for different tasks. 
 
-[insert diagram of full stack app architecture]
+![traditional-architecture](img/Slide1.png)
 
 ### How do you build applications in the cloud? 
 
-[insert diagram of full stack app architecture, with CLOUD services]
+![cloud-architecture](img/Slide2.png)
 
 1. **Services**: The different components of an application correspond to different AWS services. 
 
