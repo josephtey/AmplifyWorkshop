@@ -18,7 +18,7 @@ Table of Contents:
 * [What will we be building?](#What-will-we-be-building)
 * [Setting up your Development Environment](#setting-up-your-development-environment)
   * [Provisioning your Cloud 9 IDE](#provisioning-your-cloud-9-ide)
-  * [Setting up your Amplify + React application](#Setting-up-your-Amplify-+-React-application)
+  * [Setting up your Amplify + React application](#Setting-up-your-Amplify-React-application)
 * [Adding In-App Authentication](#Adding-In-App-Authentication)
   * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-AWS-Cognito)
   * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
