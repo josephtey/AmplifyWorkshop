@@ -208,14 +208,19 @@ The API gateway acts as the 'front-door' to your backend systems, and directs yo
 
 ![api-gateway-details](img/apigateway.png)
 
-API Gateways consist of **resources**. Resources are a collection of items, such as books or users (as shown in the example above). 
-Resources consist of **methods**. Methods are different ways in which you can interact with that specific resource, and include: 
-- GET: Get a list of items
-- POST: Creating a new item
-- PUT: Updating an existing item
-- DELETE: Deleting an existing item
+API Gateways consist of **paths**, where each path corresponds to a specific **action** (e.g. updating item, getting item, etc.)
+As seen in the diagram above, paths consist of two components: 
 
-A frontend system can 'hit' a resource + an associated method in order to trigger an action. For example, in the diagram above, if I wanted to get a list of books, I would send a GET request to the '/books' resource. 
+1. **Resources**: A collection of items, such as books or users.
+2. **Methods**: Different ways in which you can interact with that specific resource, including: 
+   1. GET: Get a list of items
+   2. POST: Creating a new item
+   3. PUT: Updating an existing item
+   4. DELETE: Deleting an existing item
+   
+
+A frontend system can send a request to a specific 'path' in order to trigger an action. 
+For example, in the diagram above, if I wanted to get a list of books, I would send a GET request to the '/books' resource. 
 
 This **resource** and **method** API design is part of the REST API specification - keep in mind, this is just a naming / standard convention for designing your APIs. 
 
@@ -234,14 +239,59 @@ Now that we understand what an API is, how our backend is configured, and how to
 
 ![simple-example](img/simple-example.png)
 
-To create a simple 
+**Scenario:** As a user, I want to get basic info about the application from the backend. 
+Based on the above diagram, there are 3 things we have to do:
+
+1. Create the Lambda function called `infoFunction` that returns this information. 
+   
+   To do this, run the following command, and follow the guided instructions:
+   ```bash
+   amplify function add
+   
+   ? Select which capability you want to add: Lambda function (serverless function)
+   ? Provide a friendly name for your resource to be used as a label for 
+   this category in the project: infoFunction
+   ? Provide the AWS Lambda function name: infoFunction
+   ? Choose the runtime that you want to use: NodeJS
+   ? Choose the function template that you want to use: Serverless ExpressJS function (Integration with API Gateway)
+   ? Do you want to access other resources in this project from your Lambda function? No
+   ? Do you want to invoke this function on a recurring schedule? No
+   ? Do you want to configure Lambda layers for this function? No
+   ? Do you want to edit the local lambda function now? Yes
+   ```
+   
+   Open the file `amplify/backend/function/infoFunction/src/app.js`, and inspect the file. 
+   You will notice that Amplify has already created GET, POST, PUT and DELETE methods for the 'info' resource. 
+   Find the line `app.get('/info', function(req, res) {`, and replace the corresponding code block with the following:
+   
+   ```javascript
+   app.get('/info', function(req, res) {
+     // Add your code here
+     res.json({message: 'I created this application during the CCA x CISSA x AWS workshop event!'});
+   });
+   ```
+   
+   Now, if you send a GET request to '/info', you will receive the following payload in your frontend:
+   ```json
+   {
+    message: 'I created this application during the CCA x CISSA x AWS workshop event!'
+   }
+   ```
+   
+   Push the function to the cloud by running the following command:
+   ```bash
+   amplify push
+   ```
+   
+   In the AWS console, search for Lambda, and click on `infoFunction-dev` - this is the function you just pushed to the Cloud. You can view the code of the function if you scroll down to 'Function Code'.
+   
+
+2. Create the API Gateway with one path, where the resource is `/books` and the method is `GET`, and connect this to the `infoFunction` Lambda function.
 
 
-1. Run the following command: 
 
-    ```bash
-    amplify api add
-    ```
+3. Send a request to the API Gateway from our web application, and receive the info from the backend. 
+
 
 ## Connecting to a Database
 
