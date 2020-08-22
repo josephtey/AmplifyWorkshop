@@ -191,7 +191,7 @@ There are two steps to adding authentication:
 ## Sending data between Frontend and Backend
 Now that we've set up authentication, let's learn about how we send data between our frontend and backend systems. 
 
-
+### Overview
 When building applications on the cloud, this is a simple visual depiction of a frontend to backend communication stream:
 ![simple-workflow](img/simple-flow.png)
 
@@ -203,13 +203,38 @@ Full-stack apps behave similarly. The user action is the stimuli - it triggers t
 
 Let's go into more detail about these services: 
 
+### API Gateway
+The API gateway acts as the 'front-door' to your backend systems, and directs your requests to relevant functions and services.
+
 ![api-gateway-details](img/apigateway.png)
 
+API Gateways consist of **resources**. Resources are a collection of items, such as books or users (as shown in the example above). 
+Resources consist of **methods**. Methods are different ways in which you can interact with that specific resource, and include: 
+- GET: Get a list of items
+- POST: Creating a new item
+- PUT: Updating an existing item
+- DELETE: Deleting an existing item
 
+A frontend system can 'hit' a resource + an associated method in order to trigger an action. For example, in the diagram above, if I wanted to get a list of books, I would send a GET request to the '/books' resource. 
+
+This **resource** and **method** API design is part of the REST API specification - keep in mind, this is just a naming / standard convention for designing your APIs. 
+
+### Backend
+The backend is the 'brain' of your application, and is where most of code responsible for processing, logic, and interacting with other services resides. 
 
 ![backend-details](img/backend.png)
 
+One way to architect your backend is to use Lambda functions. You can create MULTIPLE Lambda functions that run different code blocks to carry out different tasks. For example, I could have a Lambda responsible for database interactions, and another Lambda for interacting with machine learning services. The cool thing about Lambda functions is that they are 'serverless' - you don't need to care about servers, it's significantly cheaper, and scales automatically. 
+
+These Lambda functions can also interact with other services, including databases, file storage systems, and AI services. 
+
+
+### A simple example
+Now that we understand what an API is, how our backend is configured, and how to send data from the frontend to backend, let's create a simple workflow. 
+
 ![simple-example](img/simple-example.png)
+
+To create a simple 
 
 
 1. Run the following command: 
