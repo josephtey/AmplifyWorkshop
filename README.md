@@ -118,13 +118,14 @@ Building cloud-native fullstack web applications have several benefits:
    ```bash
    amplify init
    
-   ? Enter a name for the project amplifyWorkshop
-   ? Enter a name for the environment dev
+   ? Enter a name for the project: amplifyWorkshop
+   ? Enter a name for the environment: dev
    ? Choose your default editor: None
-   ? Choose the type of app that you're building javascript
+   ? Choose the type of app that you're building: javascript
+   
    Please tell us about your project
-   ? What javascript framework are you using react
-   ? Source Directory Path:  src
+   ? What javascript framework are you using: react
+   ? Source Directory Path: src
    ? Distribution Directory Path: build
    ? Build Command:  npm run-script build
    ? Start Command: npm run-script start
