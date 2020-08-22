@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background: #eaeaea;
 }
 
 .App-logo {
@@ -38,23 +37,27 @@
   }
 }
 
-.card {
-  width: 750px;
-  margin: 20px auto;
-  padding: 20px;
-  background: white;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-}
-
 amplify-authenticator {
   text-align: center;
 }
 
 .app {
   text-align: left;
+  flex-grow: 1;
+}
+
+.content {
+  padding: 20px;
+}
+
+.card {
+  padding: 20px;
 }
 
 .navBarTitle {
   flex-grow: 1
+}
+
+.fixedHeight {
+  height: 150px;
 }

@@ -7,6 +7,9 @@ import TableCard from './components/TableCard'
 import NavBar from './components/NavBar'
 import AddItemCard from './components/AddItemCard'
 import AboutCard from './components/AboutCard'
+import PredictionsCard from './components/PredictionsCard'
+
+import { Paper, Grid, Button } from '@material-ui/core'
 
 
 function App() {
@@ -44,24 +47,39 @@ function App() {
         }}
       />
       
-      <AboutCard 
-        text={aboutInfo}
-      />
+      <div className="content">
+        <Grid container spacing={3}>
+            <AboutCard 
+              text = { aboutInfo }
+              />
+            
+            <PredictionsCard 
+              
+            />
+            
+            <AddItemCard 
+            addAction = {
+              (id, itemName) => {
+                addTask(id, itemName)
+                setRefresh(!refresh)
+              }
+            }      />
+           <TableCard 
+              data={userTasks}
+              removeAction={(id)=>{
+                removeTask(id)
+                setRefresh(!refresh)
+              }}
+            />
+        </Grid>
+      </div>
       
-      <AddItemCard 
-        addAction={(id, itemName)=>{
-          addTask(id, itemName)
-          setRefresh(!refresh)
-        }}  
-      />
       
-      <TableCard 
-        data={userTasks}
-        removeAction={(id)=>{
-          removeTask(id)
-          setRefresh(!refresh)
-        }}
-      />
+      
+      {/*
+      
+      
+      */}
     </div>
   );
 }

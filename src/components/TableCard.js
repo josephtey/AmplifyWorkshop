@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { Typography, Table, TableHead, TableRow, TableCell, TableBody, IconButton } from '@material-ui/core';
+import { Typography, Table, TableHead, TableRow, TableCell, TableBody, IconButton, Paper, Grid } from '@material-ui/core';
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const TableCard = ({
@@ -8,7 +8,8 @@ const TableCard = ({
   removeAction
 }) => {
   return (
-    <div className="card">
+    <Grid item xs={12}>
+      <Paper className="card">
         {data.length > 0 ?
           <Table>
           <TableHead>
@@ -38,7 +39,8 @@ const TableCard = ({
           </TableBody>
         </Table>
       : <Typography>You have not created any tasks</Typography>}
-      </div>
+    </Paper>
+    </Grid>
   )
 }
 

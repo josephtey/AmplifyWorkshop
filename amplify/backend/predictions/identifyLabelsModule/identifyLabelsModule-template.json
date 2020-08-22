@@ -1,26 +1,32 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Convert resource(s) stack creation using Amplify CLI",
+    "Description": "Identify resource(s) stack creation using Amplify CLI",
     "Parameters": {
+        "resourceName": {
+            "Type": "String"
+        },
+        "identifyPolicyName": {
+            "Type": "String"
+        },
+        "access": {
+            "Type": "String"
+        },
         "authRoleName": {
             "Type": "String"
         },
         "unauthRoleName": {
             "Type": "String"
         },
-        "convertPolicyName": {
+        "adminAuthProtected": {
             "Type": "String"
         },
-        "convertType": {
+        "adminGuestProtected": {
             "Type": "String"
         },
-        "access": {
+        "identifyType": {
             "Type": "String"
         },
-        "resourceName": {
-            "Type": "String"
-        },
-        "language": {
+        "type": {
             "Type": "String"
         },
         "env": {
@@ -28,6 +34,38 @@
         }
     },
     "Conditions": {
+        "CreateAdminAuthProtected": {
+            "Fn::Not": [
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "adminAuthProtected"
+                        },
+                        "DISALLOW"
+                    ]
+                }
+            ]
+        },
+        "CreateAdminGuestProtected": {
+            "Fn::Not": [
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "adminGuestProtected"
+                        },
+                        "DISALLOW"
+                    ]
+                }
+            ]
+        },
+        "ShouldNotCreateEnvResources": {
+            "Fn::Equals": [
+                {
+                    "Ref": "env"
+                },
+                "NONE"
+            ]
+        },
         "AuthGuestRoleAccess": {
             "Fn::Equals": [
                 {
@@ -46,23 +84,23 @@
                         "Ref": "AWS::Region"
                     },
                     {
-                        "Ref": "convertType"
+                        "Ref": "identifyType"
                     }
                 ]
             }
         },
-        "language": {
+        "type": {
             "Value": {
-                "Ref": "language"
+                "Ref": "type"
             }
         }
     },
     "Resources": {
-        "PollyPolicy": {
+        "identifyLabelssPolicy": {
             "Type": "AWS::IAM::Policy",
             "Properties": {
                 "PolicyName": {
-                    "Ref": "convertPolicyName"
+                    "Ref": "identifyPolicyName"
                 },
                 "Roles": {
                     "Fn::If": [
@@ -88,10 +126,8 @@
                         {
                             "Effect": "Allow",
                             "Action": [
-                                "transcribe:GetTranscriptionJob",
-                                "transcribe:StartStreamTranscription",
-                                "transcribe:StartStreamTranscriptionWebSocket",
-                                "transcribe:StartTranscriptionJob"
+                                "rekognition:DetectLabels",
+                                "rekognition:DetectModerationLabels"
                             ],
                             "Resource": "*"
                         }
@@ -103,40 +139,40 @@
     "Mappings": {
         "RegionMapping": {
             "us-east-1": {
-                "transcription": "us-east-1"
+                "identifyLabels": "us-east-1"
             },
             "us-east-2": {
-                "transcription": "us-east-2"
+                "identifyLabels": "us-east-2"
             },
             "us-west-2": {
-                "transcription": "us-west-2"
+                "identifyLabels": "us-west-2"
             },
             "ca-central-1": {
-                "transcription": "ca-central-1"
+                "identifyLabels": "us-east-1"
             },
             "eu-west-1": {
-                "transcription": "eu-west-1"
+                "identifyLabels": "eu-west-1"
             },
             "eu-west-2": {
-                "transcription": "eu-west-2"
+                "identifyLabels": "eu-west-2"
             },
             "eu-central-1": {
-                "transcription": "eu-central-1"
+                "identifyLabels": "eu-central-1"
             },
             "ap-northeast-1": {
-                "transcription": "ap-northeast-2"
+                "identifyLabels": "ap-northeast-1"
             },
             "ap-northeast-2": {
-                "transcription": "ap-northeast-2"
+                "identifyLabels": "ap-northeast-2"
             },
             "ap-southeast-1": {
-                "transcription": "ap-southeast-1"
+                "identifyLabels": "ap-southeast-1"
             },
             "ap-southeast-2": {
-                "transcription": "ap-southeast-2"
+                "identifyLabels": "ap-southeast-2"
             },
             "ap-south-1": {
-                "transcription": "ap-south-1"
+                "identifyLabels": "ap-south-1"
             }
         }
     }

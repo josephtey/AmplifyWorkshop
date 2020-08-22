@@ -38,12 +38,6 @@
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda",
 			"dependsOn": []
-		},
-		"amplifyworkshop05aafaf9": {
-			"build": true,
-			"providerPlugin": "awscloudformation",
-			"service": "Lambda",
-			"dependsOn": []
 		}
 	},
 	"api": {
@@ -76,28 +70,10 @@
 					]
 				}
 			]
-		},
-		"mainAPI": {
-			"service": "API Gateway",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "infoFunction",
-					"attributes": [
-						"Name",
-						"Arn"
-					]
-				}
-			]
 		}
 	},
 	"storage": {
 		"itemsDB": {
-			"service": "DynamoDB",
-			"providerPlugin": "awscloudformation"
-		},
-		"items": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
 		}
@@ -110,15 +86,11 @@
 		}
 	},
 	"predictions": {
-		"interpretTextb9ac9685": {
+		"identifyLabelsModule": {
 			"providerPlugin": "awscloudformation",
-			"service": "Comprehend",
-			"interpretType": "interpretText"
-		},
-		"transcriptionebb64f6e": {
-			"providerPlugin": "awscloudformation",
-			"service": "Transcribe",
-			"convertType": "transcription"
+			"service": "Rekognition",
+			"dependsOn": [],
+			"identifyType": "identifyLabels"
 		}
 	}
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Grid, Paper } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import Predictions from '@aws-amplify/predictions';
 import AudioRecorder from '../api/audio'
@@ -11,23 +11,9 @@ const NavBar = ({
 
   const [taskName, setTaskName] = useState()
 
-  function convertFromBuffer(bytes) {
-    Predictions.convert({
-        transcription: {
-          source: {
-            bytes
-          },
-          language: "en-US"
-        },
-      }).then(({ transcription: { fullText } }) => {
-        console.log(fullText)
-        setTaskName(fullText)
-      })
-      .catch(err => setTaskName(JSON.stringify(err, null, 2)))
-  }
-
   return (
-    <div className="card">
+    <Grid item md={6} xs ={12}>
+      <Paper className="card fixedHeight">
           <TextField
             label="Task"
             onChange={(event)=>{
@@ -53,7 +39,8 @@ const NavBar = ({
           </Button>
         </div>
         <div style={{clear: 'both'}} />
-        </div>
+      </Paper>
+    </Grid>
   )
 }
 

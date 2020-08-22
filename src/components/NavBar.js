@@ -10,7 +10,7 @@ const NavBar = ({
     <AppBar position="static">
           <Toolbar>
             <Typography className="navBarTitle">
-              Homework Tracker
+              Smart Shopping List
             </Typography>
             <Button color="inherit"
               onClick={logoutAction}
