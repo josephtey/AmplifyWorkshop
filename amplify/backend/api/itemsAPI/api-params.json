@@ -23,6 +23,16 @@
                     "/DELETE"
                 ]
             }
+        },
+        {
+            "name": "/test",
+            "lambdaFunction": "amplifyworkshopf930a679",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET"
+                ]
+            }
         }
     ],
     "resourceName": "itemsAPI",
@@ -33,10 +43,13 @@
         },
         {
             "lambdaFunction": "databaseFunction"
+        },
+        {
+            "lambdaFunction": "amplifyworkshopf930a679"
         }
     ],
     "privacy": {
-        "auth": 2,
+        "auth": 3,
         "unauth": 0,
         "authRoleName": "amplify-amplifyworkshop-dev-73123-authRole",
         "unAuthRoleName": "amplify-amplifyworkshop-dev-73123-unauthRole"
@@ -57,7 +70,15 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "amplifyworkshopf930a679",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "94dd91ae"
+    "uuid": "1e2b2e52"
 }
