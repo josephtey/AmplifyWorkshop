@@ -15,7 +15,7 @@ Table of Contents:
 * [Workshop Theory](#workshop-theory)
   * [Traditional Fullstack Web Applications](#Traditional-Fullstack-Web-Applications)
   * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
-* [What are we building today?]
+* [What are we building today?](#What-are-we-building-today)
 * [Setting up your Development Environment](#setting-up-your-development-environment)
   * [Provisioning your Cloud 9 IDE](#provisioning-your-cloud-9-ide)
   * [Setting up your Amplify + React application](#Setting-up-your-Amplify-+-React-application)
