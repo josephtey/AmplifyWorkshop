@@ -17,8 +17,10 @@ Table of Contents:
   * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
 * [What are we building today?]
 * [Setting up your Development Environment](#setting-up-your-development-environment)
+  * [Provisioning your Cloud 9 IDE](#provisioning-your-cloud-9-ide)
+  * [Setting up your Amplify + React application](#Setting-up-your-Amplify-+-React-application)
 * [Adding In-App Authentication](#Adding-In-App-Authentication)
-  * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-(AWS-Cognito))
+  * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-AWS-Cognito)
   * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
 * [Sending data between Frontend and Backend](#Sending-data-between-Frontend-and-Backend)
   * [Overview](#overview)
@@ -80,7 +82,7 @@ Building cloud-native fullstack web applications have several benefits:
 
 ## Setting up your Development Environment
 
-### Provisioning a Cloud 9
+### Provisioning your Cloud 9 IDE
 
 1. Goto your AWS console via this link: https://aws.amazon.com/
 
