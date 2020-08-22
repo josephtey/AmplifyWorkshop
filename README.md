@@ -528,7 +528,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
 5. Congrats! You have successfully setup a Dynamo DB Table, and hooked it up to your web application. 
    Open the browser tab where your app is being previewed, and you should be able to get, create and delete items! 
 
-### Publishing our Web Application
+## Publishing our Web Application
 We've finished our application! However, one problem - our application is still running locally on our Cloud9 instance. 
 The last step is to host our frontend website on the cloud, so it can be accessed ANYWHERE and ANYTIME, as long as you have an internet connection. 
 
