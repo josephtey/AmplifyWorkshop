@@ -9,7 +9,7 @@ import AddItemCard from './components/AddItemCard'
 import AboutCard from './components/AboutCard'
 import PredictionsCard from './components/PredictionsCard'
 
-import { Paper, Grid, Button } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 
 
 function App() {
@@ -53,10 +53,6 @@ function App() {
               text = { aboutInfo }
               />
             
-            <PredictionsCard 
-              
-            />
-            
             <AddItemCard 
             addAction = {
               (id, itemName) => {
@@ -64,6 +60,16 @@ function App() {
                 setRefresh(!refresh)
               }
             }      />
+            
+            <PredictionsCard 
+              addAction = {
+                (id, itemName) => {
+                  addTask(id, itemName)
+                  setRefresh(!refresh)
+                }
+                }
+            />
+            
            <TableCard 
               data={userTasks}
               removeAction={(id)=>{

@@ -6,8 +6,8 @@ const AboutCard = ({
     text
 }) => {
     return (
-        <Grid item xs ={12}>
-            <Paper className="card">
+        <Grid item xs ={12} md={6}>
+            <Paper className="card fixedHeight">
                 <Typography>
                         <b> What is this application about? </b> <br/>
                         {text}

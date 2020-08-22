@@ -14,7 +14,7 @@ const TableCard = ({
           <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Task Name</TableCell>
+              <TableCell>Item</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>

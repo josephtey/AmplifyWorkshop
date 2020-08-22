@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import '../App.css';
 import { TextField, Button, Grid, Paper } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
-import Predictions from '@aws-amplify/predictions';
-import AudioRecorder from '../api/audio'
 
 const NavBar = ({
   addAction
@@ -15,14 +13,12 @@ const NavBar = ({
     <Grid item md={6} xs ={12}>
       <Paper className="card fixedHeight">
           <TextField
-            label="Task"
+            label="Item"
             onChange={(event)=>{
               setTaskName(event.target.value)
             }}
             value={taskName}
-            variant="outlined"
             fullWidth
-            autoFocus
           >
           </TextField>
         <div style={{float: 'right', paddingTop: '15px', display: 'flex'}}>
