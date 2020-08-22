@@ -44,11 +44,20 @@ const PredictionsCard = ({
                 style={{ display: "none" }}
                 onChange={async (event)=>{
                   const file = event.target.files[0]
-                  setFileName(file.name)
                   
-                  setLoading(true)
-                  await getLabelsFromImage(file)
-                  setLoading(false)
+                  if (!["jpg", "jpeg", "png"].includes(file.name.split(".")[1])){
+                    alert("File type incorrect!")
+                    return
+                  }
+                  
+                  try {
+                    setFileName(file.name)
+                    setLoading(true)
+                    await getLabelsFromImage(file)
+                    setLoading(false)
+                  } catch (err) {
+                    alert(err)
+                  }
                 }}
               />
             </Button>
