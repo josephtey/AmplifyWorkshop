@@ -111,10 +111,26 @@ Building cloud-native fullstack web applications have several benefits:
 3. Install the Amplify CLI and initialise the project (as an Amplify app)
    ```bash
    npm install -g @aws-amplify/cli
-   amplify init
    ```
+
+4. Initialise the project as an Amplify application
+
+   ```bash
+   amplify init
    
-4. To connect your React web app to Amplify, open the file `src/index.js`, and add the following code:
+   ? Enter a name for the project amplifyWorkshop
+   ? Enter a name for the environment dev
+   ? Choose your default editor: None
+   ? Choose the type of app that you're building javascript
+   Please tell us about your project
+   ? What javascript framework are you using react
+   ? Source Directory Path:  src
+   ? Distribution Directory Path: build
+   ? Build Command:  npm run-script build
+   ? Start Command: npm run-script start
+   ```
+
+5. To connect your React web app to Amplify, open the file `src/index.js`, and add the following code:
 
    In `src/index.js`, **after the import statements**:
    
@@ -123,12 +139,12 @@ Building cloud-native fullstack web applications have several benefits:
    Amplify.configure(config)
    ```
 
-5. Run the React application
+6. Run the React application
    ```bash
    npm start
    ```
    
-6. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
+7. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
    Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
 **You should see a basic React web application running in your browser!**
@@ -310,11 +326,9 @@ Based on the above diagram, there are 3 things we have to do:
    amplify api add
    
    ? Please select from one of the below mentioned services: REST
-   ? Provide a friendly name for your resource to be used as a label for 
-   this category in the project: mainAPI
+   ? Provide a friendly name for your resource to be used as a label for this category in the project: mainAPI
    ? Provide a path (e.g., /book/{isbn}): /info
-   ? Choose a Lambda source Use a Lambda function already added in the cu
-   rrent Amplify project
+   ? Choose a Lambda source Use a Lambda function already added in the current Amplify project
    ? Choose the Lambda function to invoke by this path infoFunction
    ? Restrict API access Yes
    ? Who should have access? Authenticated users only
