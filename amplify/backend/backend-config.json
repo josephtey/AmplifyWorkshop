@@ -96,6 +96,10 @@
 		"itemsDB": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
+		},
+		"items": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
 		}
 	},
 	"hosting": {

@@ -1,0 +1,7 @@
+{
+    "tableName": "items",
+    "partitionKeyName": "user",
+    "partitionKeyType": "S",
+    "sortKeyName": "timestamp",
+    "sortKeyType": "N"
+}
