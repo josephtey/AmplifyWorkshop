@@ -23,7 +23,6 @@ Table of Contents:
   * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-AWS-Cognito)
   * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
 * [Sending data between Frontend and Backend](#Sending-data-between-Frontend-and-Backend)
-  * [Overview](#overview)
   * [API Gateway](#api-gateway)
   * [Backend](#backend)
   * [A simple example](#a-simple-example)
@@ -205,8 +204,6 @@ There are two steps to adding authentication:
 
 ## Sending data between Frontend and Backend
 Now that we've set up authentication, let's learn about how we send data between our frontend and backend systems. 
-
-### Overview
 When building applications on the cloud, this is a simple visual depiction of a frontend to backend communication stream:
 ![simple-workflow](img/simple-flow.png)
 
