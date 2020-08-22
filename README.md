@@ -25,9 +25,11 @@ Table of Contents:
   * [API Gateway](#api-gateway)
   * [Backend](#backend)
   * [A simple example](#a-simple-example)
-* [Connecting to a Database]
+* [Connecting to a Database](#Connecting-to-a-Database)
+  * [Database Design](#Database-Design)
+  * [Implementing the Database](#Implementing-the-Database)
 * [Publishing our Web Application](#publish-our-web-application)
-* [Adding Machine Learning Features]
+* [Adding Machine Learning Features](#Adding-Machine-Learning-Features)
 
 ## Workshop Theory
 As a University student, you may have had some experience creating small, mini applications as part of your assessments - for example, random websites, algorithmic chunks of code, or just random python scripts. But you may be wondering, how are industrial, fully-fledged applications, such as Facebook, Google or even Github, actually built? 
@@ -510,7 +512,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    ```
    
    **Code Breakdown**
-   Sends a `POST` request to the `mainAPI` API you configured, with the resource `/items`. A `body` payload is also sent to the API, where we specify the data of  the new item we are creating. 
+   - Sends a `POST` request to the `mainAPI` API you configured, with the resource `/items`. A `body` payload is also sent to the API, where we specify the data of  the new item we are creating. 
    
    The function code for `removeTask` is as follows:
    ```javascript
@@ -521,7 +523,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    ```
    
    **Code Breakdown**
-   Sends a `DELETE` request to the `mainAPI` API you configured, with the resource `/items`. We specify the username and timestamp, as the combination of both will uniquely identify an item. 
+   - Sends a `DELETE` request to the `mainAPI` API you configured, with the resource `/items`. We specify the username and timestamp, as the combination of both will uniquely identify an item. 
    
 5. Congrats! You have successfully setup a Dynamo DB Table, and hooked it up to your web application. 
    Open the browser tab where your app is being previewed, and you should be able to get, create and delete items! 
@@ -530,14 +532,25 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
 We've finished our application! However, one problem - our application is still running locally on our Cloud9 instance. 
 The last step is to host our frontend website on the cloud, so it can be accessed ANYWHERE and ANYTIME, as long as you have an internet connection. 
 
+To do this, run the following command, and follow the guided instructions
 
+```bash
+amplify hosting add
+
+? Select the plugin module to execute: Hosting with Amplify Console
+? Choose a type: Manual Deployment
+```
+
+Lastly, run the final command to publish your application
+
+```bash
+amplify publish
+```
+
+Congrats, you have just published your application! The console should output a **link** that you can click on to access your published website. You can access this website ANYWHERE - on your phone, laptop, iPad. You can send the link to your friends and get them to make an account!
 
 
 ## Adding Machine Learning Features
 
-1. Run the following command: 
-
-    ```bash
-    amplify predictions add
-    ```
+WIP
 
