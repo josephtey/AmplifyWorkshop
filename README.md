@@ -157,7 +157,8 @@ There are two steps to adding authentication:
    
    This is where you can edit the settings of your application's authentication service. Feel free to explore the different settings you can adjust. 
    
-   Click on 'Users and Groups' under 'General Settings' on the left sidebar - this is where you can track and manage your application's users. Currently, you have no users. 
+   Click on 'Users and Groups' under 'General Settings' on the left sidebar - this is where you can track and manage your application's users.\
+   Currently, you have no users. 
    
 ### Connecting the Authentication service to your Web App
 
@@ -177,8 +178,8 @@ There are two steps to adding authentication:
     </AmplifyAuthenticator>
     ```
     
-   Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in. 
-   As such, when users try to access the application,  they will be redirected to a login page if they are unauthenticated. 
+   Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in.\
+   As such, when users try to access the application, they will be redirected to a login page if they are unauthenticated. 
     
 5. Open the tab where your application is being previewed. You should now see a login screen!
    
@@ -208,14 +209,19 @@ The API gateway acts as the 'front-door' to your backend systems, and directs yo
 
 ![api-gateway-details](img/apigateway.png)
 
-API Gateways consist of **resources**. Resources are a collection of items, such as books or users (as shown in the example above). 
-Resources consist of **methods**. Methods are different ways in which you can interact with that specific resource, and include: 
-- GET: Get a list of items
-- POST: Creating a new item
-- PUT: Updating an existing item
-- DELETE: Deleting an existing item
+API Gateways consist of **paths**, where each path corresponds to a specific **action** (e.g. updating item, getting item, etc.)
+As seen in the diagram above, paths consist of two components: 
 
-A frontend system can 'hit' a resource + an associated method in order to trigger an action. For example, in the diagram above, if I wanted to get a list of books, I would send a GET request to the '/books' resource. 
+1. **Resources**: A collection of items, such as books or users.
+2. **Methods**: Different ways in which you can interact with that specific resource, including: 
+   1. GET: Get a list of items
+   2. POST: Creating a new item
+   3. PUT: Updating an existing item
+   4. DELETE: Deleting an existing item
+   
+
+A frontend system can send a request to a specific 'path' in order to trigger an action. 
+For example, in the diagram above, if I wanted to get a list of books, I would send a GET request to the '/books' resource. 
 
 This **resource** and **method** API design is part of the REST API specification - keep in mind, this is just a naming / standard convention for designing your APIs. 
 
@@ -234,14 +240,105 @@ Now that we understand what an API is, how our backend is configured, and how to
 
 ![simple-example](img/simple-example.png)
 
-To create a simple 
+**Scenario:** As a user, I want to get basic info about the application from the backend. 
+Based on the above diagram, there are 3 things we have to do:
+
+1. Create the Lambda function called `infoFunction` that returns this information. 
+   
+   To do this, run the following command, and follow the guided instructions:
+   ```bash
+   amplify function add
+   
+   ? Select which capability you want to add: Lambda function (serverless function)
+   ? Provide a friendly name for your resource to be used as a label for 
+   this category in the project: infoFunction
+   ? Provide the AWS Lambda function name: infoFunction
+   ? Choose the runtime that you want to use: NodeJS
+   ? Choose the function template that you want to use: Serverless ExpressJS function (Integration with API Gateway)
+   ? Do you want to access other resources in this project from your Lambda function? No
+   ? Do you want to invoke this function on a recurring schedule? No
+   ? Do you want to configure Lambda layers for this function? No
+   ? Do you want to edit the local lambda function now? Yes
+   ```
+   
+   Open the file `amplify/backend/function/infoFunction/src/app.js`, and inspect the file.\
+   You will notice that Amplify has already created GET, POST, PUT and DELETE methods for the 'info' resource.\
+   Find the line `app.get('/info', function(req, res) {`, and replace the corresponding code block with the following:\
+   
+   ```javascript
+   app.get('/info', function(req, res) {
+     
+     res.json({
+      "message": "I created this application during the CCA x CISSA x AWS workshop event!"
+     });
+     
+   });
+   ```
+   
+   Now, if you send a GET request to '/info', you will receive the following payload in your frontend:
+   ```json
+   {
+    "message": "I created this application during the CCA x CISSA x AWS workshop event!"
+   }
+   ```
+   
+   Push the function to the cloud by running the following command:
+   ```bash
+   amplify push
+   ```
+   
+   In the AWS console, search for Lambda, and click on `infoFunction-dev` - this is the function you just pushed to the Cloud.\
+   You can view the code of the function if you scroll down to 'Function Code'.
+   
+
+2. Create the API Gateway with one path, where the resource is `/info` and the method is `GET`, and connect this to the `infoFunction` Lambda function.
+   
+   To do this, run the following command, and follow the guided instructions:
+
+   ```bash
+   amplify api add
+   
+   ? Please select from one of the below mentioned services: REST
+   ? Provide a friendly name for your resource to be used as a label for 
+   this category in the project: mainAPI
+   ? Provide a path (e.g., /book/{isbn}): /info
+   ? Choose a Lambda source Use a Lambda function already added in the cu
+   rrent Amplify project
+   ? Choose the Lambda function to invoke by this path infoFunction
+   ? Restrict API access Yes
+   ? Who should have access? Authenticated users only
+   ? What kind of access do you want for Authenticated users? read
+   ? Do you want to add another path? No
+   ```
+
+   Push the API Gateway to the cloud by running the following command:
+   ```bash
+   amplify push
+   ```
+   
+   In the AWS console, search for API Gateway, and click on `mainAPI` - this is the API Gateway you just pushed to the Cloud.\
+   Notice the 'info' resource that you have just created. 
 
 
-1. Run the following command: 
+3. Send a request to the API Gateway from our web application, and receive the info from the backend. 
+   
+   Open the file `src/api/db.js`\
+   
+   The function `getInfo` is used to get the application info. To configure this function to send a request to our API Gateway, add the following code inside the    function:
+   
+   ```javascript
+   const data = await API.get('mainAPI', '/info', {})
+   return data.message
+   ```
+   
+   As you can see in `line 1`, this uses API (an Amplify module that you imported) to send a `GET` request, to the `mainAPI` API you configured, with the resource    `/info`. The last parameter is an empty object (`{}`) because we are not sending any parameters to our API gateway.\
+   
+   Save the file
+   
+4. Congrats! Your web app now sends a request to the API gateway, and should receive the info that is returned by the Lambda. 
 
-    ```bash
-    amplify api add
-    ```
+   Open the browser tab where your app is being previewed, and you should see the info populated at the top of your application!
+
 
 ## Connecting to a Database
 
