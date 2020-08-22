@@ -19,7 +19,11 @@ Table of Contents:
 * [Adding In-App Authentication](#Adding-In-App-Authentication)
   * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-(AWS-Cognito))
   * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
-* [Sending data between Frontend and Backend]
+* [Sending data between Frontend and Backend](#Sending-data-between-Frontend-and-Backend)
+  * [Overview](#overview)
+  * [API Gateway](#api-gateway)
+  * [Backend](#backend)
+  * [A simple example](#a-simple-example)
 * [Connecting to a Database]
 * [Adding Machine Learning Features]
 
@@ -322,7 +326,7 @@ Based on the above diagram, there are 3 things we have to do:
 
 3. Send a request to the API Gateway from our web application, and receive the info from the backend. 
    
-   Open the file `src/api/db.js`\
+   Open the file `src/api/db.js`
    
    The function `getInfo` is used to get the application info. To configure this function to send a request to our API Gateway, add the following code inside the    function:
    
@@ -331,7 +335,7 @@ Based on the above diagram, there are 3 things we have to do:
    return data.message
    ```
    
-   As you can see in `line 1`, this uses API (an Amplify module that you imported) to send a `GET` request, to the `mainAPI` API you configured, with the resource    `/info`. The last parameter is an empty object (`{}`) because we are not sending any parameters to our API gateway.\
+   As you can see in `line 1`, this uses API (an Amplify module that you imported) to send a `GET` request, to the `mainAPI` API you configured, with the resource    `/info`. The last parameter is an empty object (`{}`) because we are not sending any parameters to our API gateway.
    
    Save the file
    
@@ -339,8 +343,15 @@ Based on the above diagram, there are 3 things we have to do:
 
    Open the browser tab where your app is being previewed, and you should see the info populated at the top of your application!
 
+Now that you understand the basics of how APIs, Lambdas and connecting everything works, let's connect a database to our application. 
 
 ## Connecting to a Database
+AWS Amplify uses AWS DynamoDB as its database service. AWS DynamoDB is a NoSQL database service that stores data in JSON documents. 
+
+![database-flow](img/database-flow.png)
+
+
+
 
 1. Run the following command: 
 
