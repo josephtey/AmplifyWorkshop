@@ -62,9 +62,9 @@ Building cloud-native fullstack web applications have several benefits:
    1. You don't have to manage or maintain these servers - Amazon takes care of everything. 
    2. You only pay for what you use - it's a LOT cheaper. 
 
-3. **Using AWS Amplify**: While AWS provides all these services to build a web application, a developer must still manually configure and connect all these services together. However, **AWS Amplify** is a framework that allows you to automatically provision and connect ALL these services in literally minutes. Each service is treated like a plug-and-play module, rapidly speeding up the process of web application development. 
+3. **Using AWS Amplify**: While AWS provides all these services to build a web application, a developer must still manually configure and connect all these services together. However, **AWS Amplify** is a framework that allows you to automatically provision and connect ALL these services in literally minutes. **AWS Amplify** acts as a higher-level service that interacts with a range of other AWS services. Each service is treated like a plug-and-play module, rapidly speeding up the process of web application development. 
 
-We will be using AWS Amplify to build our fullstack, cloud-native web application today!
+**We will be using AWS Amplify to build our fullstack, cloud-native web application today!**
 
 ## Setting up your Development Environment
 
@@ -150,10 +150,10 @@ There are two steps to adding authentication:
    
 3. Congrats! Your authentication service has been created. Let's take a look at this in the Amazon Console.
   
-   Open the AWS console: https://console.aws.amazon.com/console/home
-   Search up 'Cognito' in the main catalog search bar, and click the first option.
-   Click 'Manage user pools'.
-   Click your Amplify project.
+   1. Open the AWS console: https://console.aws.amazon.com/console/home
+   2. Search up 'Cognito' in the main catalog search bar, and click the first option.
+   3. Click 'Manage user pools'.
+   4. Click your Amplify project.
    
    This is where you can edit the settings of your application's authentication service. Feel free to explore the different settings you can adjust. 
    
@@ -177,15 +177,40 @@ There are two steps to adding authentication:
     </AmplifyAuthenticator>
     ```
     
+   Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in. 
+   As such, when users try to access the application,  they will be redirected to a login page if they are unauthenticated. 
+    
 5. Open the tab where your application is being previewed. You should now see a login screen!
    
    Follow the instructions to make an account, verify your email, and then login. 
    
-   Access the Cognito dashboard in the AWS Console (https://console.aws.amazon.com/console/home), click 'Users and Groups', and you should see the user account you just created!
+   Access the Cognito dashboard in the AWS Console (https://console.aws.amazon.com/console/home), click 'Users and Groups', and you should see the user account that you just created!
    
 **Congrats! You have just set up an Authentication service, and connected it to your web application.** 
 
 ## Sending data between Frontend and Backend
+Now that we've set up authentication, let's learn about how we send data between our frontend and backend systems. 
+
+
+When building applications on the cloud, this is a simple visual depiction of a frontend to backend communication stream:
+![simple-workflow](img/simple-flow.png)
+
+There are four main components involved this communication flowchart. To explain how they interact with each other, I will use the analogy of how humans respond to the world around us. 
+
+It's a very hot day, and you feel hot. But why? Firstly, there's a *stimuli*: heat. Secondly, there are **sensors** on our skin that detect this high temperature. After sensing this, **neurons** throughout our body sends this information to our **brain**. Our **brain** registers that we are HOT, and then triggers a range of actions - fanning ourselves, taking off our clothes, etc. 
+
+Full-stack apps behave similarly. The user action is the stimuli - it triggers this whole process. The frontend, whether in the form of a button, a text field, etc., is the sensor - it registers the user action. The API Gateway acts as the neurons - it sends information to different places depending on the user action. And lastly, the backend is the brain - it receives these 'requests', thinks about how to respond, and then carries out certain actions.
+
+Let's go into more detail about these services: 
+
+![api-gateway-details](img/apigateway.png)
+
+
+
+![backend-details](img/backend.png)
+
+![simple-example](img/simple-example.png)
+
 
 1. Run the following command: 
 
