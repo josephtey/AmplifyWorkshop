@@ -15,7 +15,7 @@ Table of Contents:
 * [Workshop Theory](#workshop-theory)
   * [Traditional Fullstack Web Applications](#Traditional-Fullstack-Web-Applications)
   * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
-* [What are we building today?](#What-are-we-building-today)
+* [What will we be building?](#What-will-we-be-building)
 * [Setting up your Development Environment](#setting-up-your-development-environment)
   * [Provisioning your Cloud 9 IDE](#provisioning-your-cloud-9-ide)
   * [Setting up your Amplify + React application](#Setting-up-your-Amplify-+-React-application)
@@ -76,7 +76,7 @@ Building cloud-native fullstack web applications have several benefits:
 
 **We will be using AWS Amplify to build our fullstack, cloud-native web application today!**
 
-## What will we be building today? 
+## What will we be building? 
 
 
 
