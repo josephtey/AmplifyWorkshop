@@ -12,20 +12,25 @@ To answer this question, we will focus on using AWS to supercharge **web develop
 We hope that by the end of this workshop, you will not only be confident using AWS in your own projects, but you will realise the vast range of possibilities the AWS Cloud has to offer.
 
 Table of Contents: 
-* [Introduction to Workshop](#workshop-theory)
+* [Workshop Theory](#workshop-theory)
   * [Traditional Fullstack Web Applications](#Traditional-Fullstack-Web-Applications)
   * [Cloud Native Fullstack Web Applications](#Cloud-Native-Fullstack-Web-Applications)
+* [What will we be building?](#What-will-we-be-building)
 * [Setting up your Development Environment](#setting-up-your-development-environment)
+  * [Provisioning your Cloud 9 IDE](#provisioning-your-cloud-9-ide)
+  * [Setting up your Amplify + React application](#Setting-up-your-Amplify-React-application)
 * [Adding In-App Authentication](#Adding-In-App-Authentication)
-  * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-(AWS-Cognito))
+  * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-AWS-Cognito)
   * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
 * [Sending data between Frontend and Backend](#Sending-data-between-Frontend-and-Backend)
-  * [Overview](#overview)
   * [API Gateway](#api-gateway)
   * [Backend](#backend)
   * [A simple example](#a-simple-example)
-* [Connecting to a Database]
-* [Adding Machine Learning Features]
+* [Connecting to a Database](#Connecting-to-a-Database)
+  * [Database Design](#Database-Design)
+  * [Implementing the Database](#Implementing-the-Database)
+* [Publishing our Web Application](#publish-our-web-application)
+* [Adding Machine Learning Features](#Adding-Machine-Learning-Features)
 
 ## Workshop Theory
 As a University student, you may have had some experience creating small, mini applications as part of your assessments - for example, random websites, algorithmic chunks of code, or just random python scripts. But you may be wondering, how are industrial, fully-fledged applications, such as Facebook, Google or even Github, actually built? 
@@ -70,9 +75,13 @@ Building cloud-native fullstack web applications have several benefits:
 
 **We will be using AWS Amplify to build our fullstack, cloud-native web application today!**
 
+## What will we be building? 
+
+
+
 ## Setting up your Development Environment
 
-### Provisioning a Cloud 9
+### Provisioning your Cloud 9 IDE
 
 1. Goto your AWS console via this link: https://aws.amazon.com/
 
@@ -102,10 +111,27 @@ Building cloud-native fullstack web applications have several benefits:
 3. Install the Amplify CLI and initialise the project (as an Amplify app)
    ```bash
    npm install -g @aws-amplify/cli
-   amplify init
    ```
+
+4. Initialise the project as an Amplify application
+
+   ```bash
+   amplify init
    
-4. To connect your React web app to Amplify, open the file `src/index.js`, and add the following code:
+   ? Enter a name for the project: amplifyWorkshop
+   ? Enter a name for the environment: dev
+   ? Choose your default editor: None
+   ? Choose the type of app that you're building: javascript
+   
+   Please tell us about your project
+   ? What javascript framework are you using: react
+   ? Source Directory Path: src
+   ? Distribution Directory Path: build
+   ? Build Command:  npm run-script build
+   ? Start Command: npm run-script start
+   ```
+
+5. To connect your React web app to Amplify, open the file `src/index.js`, and add the following code:
 
    In `src/index.js`, **after the import statements**:
    
@@ -114,12 +140,12 @@ Building cloud-native fullstack web applications have several benefits:
    Amplify.configure(config)
    ```
 
-5. Run the React application
+6. Run the React application
    ```bash
    npm start
    ```
    
-6. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
+7. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
    Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
 **You should see a basic React web application running in your browser!**
@@ -195,8 +221,6 @@ There are two steps to adding authentication:
 
 ## Sending data between Frontend and Backend
 Now that we've set up authentication, let's learn about how we send data between our frontend and backend systems. 
-
-### Overview
 When building applications on the cloud, this is a simple visual depiction of a frontend to backend communication stream:
 ![simple-workflow](img/simple-flow.png)
 
@@ -303,11 +327,9 @@ Based on the above diagram, there are 3 things we have to do:
    amplify api add
    
    ? Please select from one of the below mentioned services: REST
-   ? Provide a friendly name for your resource to be used as a label for 
-   this category in the project: mainAPI
+   ? Provide a friendly name for your resource to be used as a label for this category in the project: mainAPI
    ? Provide a path (e.g., /book/{isbn}): /info
-   ? Choose a Lambda source Use a Lambda function already added in the cu
-   rrent Amplify project
+   ? Choose a Lambda source Use a Lambda function already added in the current Amplify project
    ? Choose the Lambda function to invoke by this path infoFunction
    ? Restrict API access Yes
    ? Who should have access? Authenticated users only
@@ -346,36 +368,203 @@ Based on the above diagram, there are 3 things we have to do:
 Now that you understand the basics of how APIs, Lambdas and connecting everything works, let's connect a database to our application. 
 
 ## Connecting to a Database
-AWS Amplify uses AWS DynamoDB as its database service. AWS DynamoDB is a NoSQL database service that stores data in JSON documents. 
+AWS Amplify uses AWS DynamoDB as its database service - a serverless, NoSQL database solution that supports key-value and document data structures. 
+
+### Database Design
+![database-design](img/tableDesign.png)
+
+The above diagram is the design for the database. Columns include:
+
+1. `user`: Each user should have their own items. This column would allow us to display only the items relevant to a specific user. 
+2. `timestamp`: Tracks the exact time in which items are created. Allows us to sort the table by creation time. 
+3. `itemName`: The name of the item being created. 
+
+DynamoDB tables require a primary key to uniquely identify each item in the table. A primary key can be a single column, OR, a combination that includes a partition key and a sort key. For our table:
+
+1. **Partition Key** is `user`. This allows us to **partition** our queries based on the `user` column, so we can display items relevant to only the logged-in user. 
+2. **Sort Key** is `timestamp`. This allows us to **sort** our table based on creation time. 
+
+Before you create the database, you must specify how items in your table are uniquely organized. You do this by specifying a primary key. The primary key uniquely identifies each item in the table so that no two items can have the same key. This can be an individual column, or a combination that includes a primary key and a sort key.
+
+### Implementing the Database
 
 ![database-flow](img/database-flow.png)
 
+Based on the diagram, we have to provision the database, create a new Lambda function for database interactions, update the API with new paths, before connecting it with our web application. 
 
+1. Create the Dynamo DB Table
+   
+   Run the following command, and follow the guided instructions
+   ```javascript
+     amplify storage add
+    
+     ? Please select from one of the below mentioned services: NoSQL Database
 
+     Welcome to the NoSQL DynamoDB database wizard
+     This wizard asks you a series of questions to help determine how to set up your NoSQL database table.
 
-1. Run the following command: 
+     ? Please provide a friendly name for your resource that will be used to label this category in the project: items
+     ? Please provide table name: items
 
-    ```bash
-    amplify storage add
+     You can now add columns to the table.
+
+     ? What would you like to name this column: user
+     ? Please choose the data type: string
+     ? Would you like to add another column? Yes
+     ? What would you like to name this column: timestamp
+     ? Please choose the data type: number
+     ? Would you like to add another column? Yes
+     ? What would you like to name this column: itemName
+     ? Please choose the data type: string
+     ? Would you like to add another column? No
+
+     ? Please choose partition key for the table: user
+     ? Do you want to add a sort key to your table? Yes
+     ? Please choose sort key for the table: timestamp
+
+     ? Do you want to add global secondary indexes to your table? No
+     ? Do you want to add a Lambda Trigger for your Table? No
     ```
     
-2. Run the following command: 
+    Push the DynamoDB Table to the cloud by running the following command:
+   ```bash
+   amplify push
+   ```
+   
+   In the AWS console, search for DynamoDB, and click on `items-dev` - this is the table you just pushed to the Cloud. Currently, it should be empty.
 
+2. Create the Lambda function called `databaseFunction` to interact with the DynamoDB Table. 
+
+    We will be using a **function template** provided by Amplify specifically for database interactions.\
+    It is called `CRUD function for DynamoDB (Integration with API Gateway)`, where `CRUD` stands for *Create, Read, Update and Delete***, signifying it has pre-built functions for creating, reading, updating and deleting items within the database. 
+    
+   ![crud-template](img/CRUDTemplate.png)
+    
+    
+    To create a new function with the CRUD template, run the following command, and follow the guided instructions. 
     ```bash
     amplify function add
+    
+    ? Select which capability you want to add: Lambda function (serverless function)
+    ? Provide a friendly name for your resource to be used as a label for this category in the project: databaseFunction
+    ? Provide the AWS Lambda function name: databaseFunction
+    ? Choose the runtime that you want to use: NodeJS
+    ? Choose the function template that you want to use: CRUD function for DynamoDB (Integration with API Gateway)
+    ? Choose a DynamoDB data source option: Use DynamoDB table configured in the current Amplify project
+    ? Choose from one of the already configured DynamoDB tables: items
+    ? Do you want to access other resources in this project from your Lambda function? No
+    ? Do you want to invoke this function on a recurring schedule? No
+    ? Do you want to configure Lambda layers for this function? No
+    ? Do you want to edit the local lambda function now? Yes
+    ```
+    
+    Open the file `amplify/backend/function/databaseFunction/src/app.js`, and inspect the file.\
+    Scrolling through it, you should notice the CRUD paths that have been automatically generated (same as the diagram). 
+    
+    Push the Lambda function to the cloud by running the following command:
+    ```bash
+    amplify push
     ```
 
-3. Run the following command: 
+3. Update the API with the new paths required for the frontend to interact with the database. 
 
+    As all of the paths for `databaseFunction` begin with `/items`, we only need to add one more path to our `mainAPI` API.\
+    To update the `mainAPI` API Gateway, run the following command, and follow the guided instructions.
+    
     ```bash
     amplify api update
+    
+    ? Please select from one of the below mentioned services: REST
+    ? Please select the REST API you would want to update mainAPI
+    ? What would you like to do Add another path
+    ? Provide a path (e.g., /book/{isbn}): /items
+    ? Choose a Lambda source Use a Lambda function already added in the current Amplify project
+    ? Choose the Lambda function to invoke by this path databaseFunction
+    ? Restrict API access Yes
+    ? Who should have access? Authenticated users only
+    ? What kind of access do you want for Authenticated users? create, read, update, delete
+    ? Do you want to add another path? No
     ```
+    
+    Push the updated API gateway to the cloud by running the following command:
+    ```bash
+    amplify push
+    ```
+    
+    Open the AWS Console, search for API Gateway, and click into the Amplify Project. You should see the new `/items` path that you have added. 
+    
+4. Connect your web application to the database. 
+
+   Currently, when we click 'Add' in our application, nothing happens. Let's change this.
+   Open the file `src/api/db.js`, and note that there are three empty functions: `getUserTasks`, `addTask`, and `removeTask`. 
+   
+   The function code for `getUserTasks` is as follows:
+   ```javascript
+   const userData = await Auth.currentAuthenticatedUser()
+   const data = await API.get('mainAPI', '/items/' + userData.username, {})
+
+   return data
+   ```
+   
+   **Code Breakdown**
+   - Line 1: Gets the details of the currently authenticated user. We use this to get the logged-in user's username. 
+   - Line 2: Sends a `GET` request to the `mainAPI` API you configured, with the resource `/items`, and returning only the data of the current user. 
+   
+   The function code for `addTask` is as follows:
+   ```javascript
+   const userData = await Auth.currentAuthenticatedUser()
+
+   const response = await API.post('mainAPI', '/items', {
+       body: {
+           timestamp: new Date().getTime(),
+           user: userData.username,
+           itemName
+       }
+   })
+
+   return response
+   ```
+   
+   **Code Breakdown**
+   - Sends a `POST` request to the `mainAPI` API you configured, with the resource `/items`. A `body` payload is also sent to the API, where we specify the data of  the new item we are creating. 
+   
+   The function code for `removeTask` is as follows:
+   ```javascript
+   const userData = await Auth.currentAuthenticatedUser()
+   const response = await API.del('mainAPI', '/items/object/' + userData.username + '/' + timestamp, {})
+
+   return response
+   ```
+   
+   **Code Breakdown**
+   - Sends a `DELETE` request to the `mainAPI` API you configured, with the resource `/items`. We specify the username and timestamp, as the combination of both will uniquely identify an item. 
+   
+5. Congrats! You have successfully setup a Dynamo DB Table, and hooked it up to your web application. 
+   Open the browser tab where your app is being previewed, and you should be able to get, create and delete items! 
+
+## Publishing our Web Application
+We've finished our application! However, one problem - our application is still running locally on our Cloud9 instance. 
+The last step is to host our frontend website on the cloud, so it can be accessed ANYWHERE and ANYTIME, as long as you have an internet connection. 
+
+To do this, run the following command, and follow the guided instructions
+
+```bash
+amplify hosting add
+
+? Select the plugin module to execute: Hosting with Amplify Console
+? Choose a type: Manual Deployment
+```
+
+Lastly, run the final command to publish your application
+
+```bash
+amplify publish
+```
+
+Congrats, you have just published your application! The console should output a **link** that you can click on to access your published website. You can access this website ANYWHERE - on your phone, laptop, iPad. You can send the link to your friends and get them to make an account!
+
 
 ## Adding Machine Learning Features
 
-1. Run the following command: 
-
-    ```bash
-    amplify predictions add
-    ```
+WIP
 
