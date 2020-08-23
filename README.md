@@ -20,8 +20,6 @@ Table of Contents:
   * [Provisioning your Cloud 9 IDE](#provisioning-your-cloud-9-ide)
   * [Setting up your Amplify + React application](#Setting-up-your-Amplify-React-application)
 * [Adding In-App Authentication](#Adding-In-App-Authentication)
-  * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-AWS-Cognito)
-  * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
 * [Sending data between Frontend and Backend](#Sending-data-between-Frontend-and-Backend)
   * [API Gateway](#api-gateway)
   * [Backend](#backend)
@@ -150,7 +148,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    ? Enter a name for the project: amplifyWorkshop
    ? Enter a name for the environment: dev
    ? Choose your default editor: None
-   ? Choose the type of app that you're building: javascript
+   ? Choose the type of app that youre building: javascript
    
    Please tell us about your project
    ? What javascript framework are you using: react
