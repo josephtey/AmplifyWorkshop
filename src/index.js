@@ -11,7 +11,6 @@ import Amplify from 'aws-amplify'
 import CssBaseline from "@material-ui/core/CssBaseline";
 import orange from '@material-ui/core/colors/orange';
 
-
 Amplify.configure(config)
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
 
@@ -27,8 +26,8 @@ ReactDOM.render(
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <AmplifyAuthenticator>
-          <App />
-        </AmplifyAuthenticator>
+        <App />
+      </AmplifyAuthenticator>
     </ThemeProvider>
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
