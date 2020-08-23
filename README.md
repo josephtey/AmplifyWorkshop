@@ -76,7 +76,37 @@ Building cloud-native fullstack web applications have several benefits:
 **We will be using AWS Amplify to build our fullstack, cloud-native web application today!**
 
 ## What will we be building? 
+We will be building a Shopping List application!
 
+### Demo
+**Link**: https://dev.d2jld5htjwnhsz.amplifyapp.com
+
+![app-screenshot](img/AppScreenshot.png)
+
+### Key Features
+- Log-in / Signup
+- Fetch all the items associated to a user
+- Ability to create a new item
+- Ability to delete an existing item
+- **BONUS**: Use AI to recognise objects in images, and allow users to add those recognised objects
+
+There are four main components to this application
+1. Authentication
+   - Ability to log-in
+   - Ability to sign-up
+   - You must be authenticated to make requests to the backend
+2. A fullstack app architecture with a frontend and backend
+   - API that acts as the 'front door' to the backend
+   - Ability to send data between frontend and backend, e.g. 'About Info' is from the backend. 
+3. Database
+   - Fetch all the items associated to a user
+   - Ability to create a new item
+   - Ability to delete an existing item
+4. **BONUS:** Integration with other services
+   - Use AI to recognise objects in images
+   - Allow users to add these recognised objects
+
+These 4 components are the **basis** of almost every application. With these 4 components, you will have the skills to make a forum, a to-do list app, even a social media platform! 
 
 
 ## Setting up your Development Environment
