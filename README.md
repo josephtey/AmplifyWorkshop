@@ -165,6 +165,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    In `src/index.js`, **after the import statements**:
    
    ```javascript
+   import config from './aws-exports'
    import Amplify from 'aws-amplify'
    Amplify.configure(config)
    ```
