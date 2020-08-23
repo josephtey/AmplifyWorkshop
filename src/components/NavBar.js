@@ -13,7 +13,8 @@ const NavBar = ({
               Smart Shopping List
             </Typography>
             <Button color="inherit"
-              onClick={logoutAction}
+              onClick={async ()=>{
+              }}
             >
               Logout
             </Button>
