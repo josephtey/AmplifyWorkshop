@@ -597,9 +597,9 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    import { API, Auth } from 'aws-amplify';
    ```
    
-   The file has three empty functions: `getUserItems`, `getItem`, and `deleteItem`. 
+   **The file has three empty functions: `getUserItems`, `getItem`, and `deleteItem`.** 
    
-   #### getUserItems
+   ### getUserItems() Function
    This function is to fetch all the items of a specific user. The code for this function is below:
    ```javascript
    export async function getUserItems() {
@@ -614,7 +614,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    - Line 1: Gets the details of the currently authenticated user. We use this to get the logged-in user's username. 
    - Line 2: Sends a `GET` request to the `mainAPI` API you configured, with the resource `/items`, and returning only the data of the current user. 
    
-   #### addItem
+   ### addItem() Function
    This function is to add an item that a user created. The code for this function is below:
    ```javascript
    export async function addItem() {
@@ -636,7 +636,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    - Sends a `POST` request to the `mainAPI` API you configured, with the resource `/items`. A `body` payload is also sent to the API, where we specify the data of  the new item we are creating. 
    
    
-   #### addItem
+   ### deleteItem() Function
    This function is to delete an item from a user's account. The code for this function is below:
    ```javascript
    export async function deleteItem(timestamp) {
