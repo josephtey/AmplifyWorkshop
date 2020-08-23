@@ -526,8 +526,9 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
 
 2. Create the Lambda function called `databaseFunction` to interact with the DynamoDB Table. 
 
-    We will be using a **function template** provided by Amplify specifically for database interactions.\
-    It is called `CRUD function for DynamoDB (Integration with API Gateway)`, where `CRUD` stands for *Create, Read, Update and Delete***, signifying it has pre-built functions for creating, reading, updating and deleting items within the database. 
+    We will be using a **function template** provided by Amplify specifically for database interactions.
+    
+    It is called `CRUD function for DynamoDB (Integration with API Gateway)`, where `CRUD` stands for **Create, Read, Update and Delete***, signifying it has pre-built functions for creating, reading, updating and deleting items within the database. 
     
    ![crud-template](img/CRUDTemplate.png)
     
@@ -546,7 +547,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
     ? Do you want to access other resources in this project from your Lambda function? No
     ? Do you want to invoke this function on a recurring schedule? No
     ? Do you want to configure Lambda layers for this function? No
-    ? Do you want to edit the local lambda function now? Yes
+    ? Do you want to edit the local lambda function now? No
     ```
     
     Open the file `amplify/backend/function/databaseFunction/src/app.js`, and inspect the file.\
@@ -584,47 +585,66 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
     
     Open the AWS Console, search for API Gateway, and click into the Amplify Project. You should see the new `/items` path that you have added. 
     
-4. Connect your web application to the database. 
+4. Connect your web application to the database via the API gateway. 
 
    Currently, when we click 'Add' in our application, nothing happens. Let's change this.
-   Open the file `src/api/db.js`, and note that there are three empty functions: `getUserTasks`, `addTask`, and `removeTask`. 
    
-   The function code for `getUserTasks` is as follows:
+   Open the file `src/api/db.js` - the file responsible for all the calls to the API from the frontend. 
+   
+   Since we need to connect to the API, we need the API module from the Amplify library - this is already imported. We also need to get the **username** of the currently authenticated user, so we also need to import the Auth module. To do this, add the import after the API module:
+   
    ```javascript
-   const userData = await Auth.currentAuthenticatedUser()
-   const data = await API.get('mainAPI', '/items/' + userData.username, {})
+   import { API, Auth } from 'aws-amplify';
+   ```
+   
+   The file has three empty functions: `getUserItems`, `getItem`, and `deleteItem`. 
+   
+   #### getUserItems
+   This function is to fetch all the items of a specific user. The code for this function is below:
+   ```javascript
+   export async function getUserItems() {
+       const userData = await Auth.currentAuthenticatedUser()
+       const data = await API.get('mainAPI', '/items/' + userData.username, {})
 
-   return data
+       return data
+   }
    ```
    
    **Code Breakdown**
    - Line 1: Gets the details of the currently authenticated user. We use this to get the logged-in user's username. 
    - Line 2: Sends a `GET` request to the `mainAPI` API you configured, with the resource `/items`, and returning only the data of the current user. 
    
-   The function code for `addTask` is as follows:
+   #### addItem
+   This function is to add an item that a user created. The code for this function is below:
    ```javascript
-   const userData = await Auth.currentAuthenticatedUser()
+   export async function addItem() {
+       const userData = await Auth.currentAuthenticatedUser()
 
-   const response = await API.post('mainAPI', '/items', {
-       body: {
-           timestamp: new Date().getTime(),
-           user: userData.username,
-           itemName
-       }
-   })
+       const response = await API.post('mainAPI', '/items', {
+           body: {
+               timestamp: new Date().getTime(),
+               user: userData.username,
+               itemName
+           }
+       })
 
-   return response
+       return response
+   }
    ```
    
    **Code Breakdown**
    - Sends a `POST` request to the `mainAPI` API you configured, with the resource `/items`. A `body` payload is also sent to the API, where we specify the data of  the new item we are creating. 
    
-   The function code for `removeTask` is as follows:
+   
+   #### addItem
+   This function is to delete an item from a user's account. The code for this function is below:
    ```javascript
-   const userData = await Auth.currentAuthenticatedUser()
-   const response = await API.del('mainAPI', '/items/object/' + userData.username + '/' + timestamp, {})
+   export async function deleteItem(timestamp) {
+       const userData = await Auth.currentAuthenticatedUser()
+       const response = await API.del('mainAPI', '/items/object/' + userData.username + '/' + timestamp, {})
 
-   return response
+       return response
+   }
    ```
    
    **Code Breakdown**
