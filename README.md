@@ -617,7 +617,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    ### addItem() Function
    This function is to add an item that a user created. The code for this function is below:
    ```javascript
-   export async function addItem() {
+   export async function addItem(itemName) {
        const userData = await Auth.currentAuthenticatedUser()
 
        const response = await API.post('mainAPI', '/items', {
