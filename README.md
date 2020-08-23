@@ -332,12 +332,13 @@ Based on the above diagram, there are 3 things we have to do:
 2. Create the Lambda function called `infoFunction` that returns this information, and connect this to the API. 
 3. Send a request to the API Gateway from our web application, and receive the info from the backend. 
 
-Let's try this in our application:
+**Let's try this in our application**
 
 Run the following command:
 ```bash
 amplify api add
 ```
+**You will now be asked a series of questions by Amplify: **
 
 1. Create the API Gateway with the path `/info`
 
@@ -405,11 +406,19 @@ amplify api add
    amplify push
    ```
    
-   This might take a while. 
+   While you are waiting, think about what you just did. You set up an API, a Lambda function, edited the Lambda function, and just pushed it to the cloud. 
+   
+   After the process is finished, let's see how this looks in the Amazon Console.
+  
+   1. Open the AWS console: https://console.aws.amazon.com/console/home
+   2. Search up 'Lambda' in the main catalog search bar, and click the first option.
+   3. Click on `infoFunction-dev`, and view the code of the function by scrolling down to `Function Code`. This is the Lambda function that you just pushed up to       the cloud. 
+   4. Click on `Services` at the top, and search for `API Gateway`, and click on `mainAPI`. This is the API Gateway you just pushed to the Cloud. Notice the 'info' resource that you have just created. 
+   
 
-5. While we are waiting, let's connect our website to the API Gateway to get the about information. 
+5. Connect our website to the API Gateway to get the about information. 
 
-   Open the file `src/api/db.js`
+   Open the file `src/api/db.js` - this file is responsible for retrieving and sendinng data to our API. 
    
    To connect to the API, we need to import a module provided by Amplify. Add this to the top of your file:
    
@@ -420,7 +429,7 @@ amplify api add
    The function `getAboutInfo` is used to get the application info. To configure this function to send a request to our API Gateway, replace it with the following code:
    
    ```javascript
-   export aysnc function getAboutInfo() {
+   export async function getAboutInfo() {
        const data = await API.get('mainAPI', '/info', {})
        return data.message
    }
@@ -430,19 +439,10 @@ amplify api add
    - Uses API (the Amplify module that you imported) to send a `GET` request to `/info` in the `mainAPI` API that you configured. 
    - In doing this, the API gateway will call the `infoFunction` Lambda function that you previously created.
    - `infoFunction` will return a message back to the API, which will in turn send it back to our web application. 
-   - Lastly, I am returning the message sent back from the Lambda function. 
    
 4. Congrats! Your web app now sends a request to the API gateway, and should receive the info that is returned by the Lambda.\
    Open the browser tab where your app is being previewed, and you should see the info populated at the top of your application!
    
-   Let's see how this looks in the Amazon Console.
-  
-   1. Open the AWS console: https://console.aws.amazon.com/console/home
-   2. Search up 'Lambda' in the main catalog search bar, and click the first option.
-   3. Click on `infoFunction-dev`, and view the code of the function by scrolling down to `Function Code`. This is the Lambda function that you just pushed up to       the cloud. 
-   4. Click on `Services` at the top, and search for `API Gateway`, and click on `mainAPI`. This is the API Gateway you just pushed to the Cloud. Notice the 'info' resource that you have just created. 
-   
-
 Now that you understand the basics of how APIs, Lambdas and connecting everything works, let's connect a database to our application. 
 
 ## Connecting to a Database
