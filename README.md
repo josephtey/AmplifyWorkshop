@@ -524,7 +524,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    
    In the AWS console, search for DynamoDB, and click on `items-dev` - this is the table you just pushed to the Cloud. Currently, it should be empty.
 
-2. Create the Lambda function called `databaseFunction` to interact with the DynamoDB Table. 
+2. Create the Lambda function called `databaseFunction` to interact with the DynamoDB Table, and hook it up to the API. 
 
     We will be using a **function template** provided by Amplify specifically for database interactions.
     
@@ -533,11 +533,21 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    ![crud-template](img/CRUDTemplate.png)
     
     
-    To create a new function with the CRUD template, run the following command, and follow the guided instructions. 
-    ```bash
-    amplify function add
+    Firstly, let's add a new path to our API gateway. As all of the paths for `databaseFunction` begin with `/items`, we only need to add one more path to our `mainAPI` API.
     
-    ? Select which capability you want to add: Lambda function (serverless function)
+    ```bash
+    amplify api update
+    
+    ? Please select from one of the below mentioned services: REST
+    ? Please select the REST API you would want to update mainAPI
+    ? What would you like to do: Add another path
+    ? Provide a path (e.g., /book/{isbn}): /items
+    ```
+    
+    Secondly, let's setup the `databaseFunction` Lambda function that uses the CRUD template.
+    
+    ```bash
+    ? Choose a Lambda source: Create a new Lambda function
     ? Provide a friendly name for your resource to be used as a label for this category in the project: databaseFunction
     ? Provide the AWS Lambda function name: databaseFunction
     ? Choose the runtime that you want to use: NodeJS
@@ -548,44 +558,24 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
     ? Do you want to invoke this function on a recurring schedule? No
     ? Do you want to configure Lambda layers for this function? No
     ? Do you want to edit the local lambda function now? No
-    ```
     
-    Open the file `amplify/backend/function/databaseFunction/src/app.js`, and inspect the file.\
-    Scrolling through it, you should notice the CRUD paths that have been automatically generated (same as the diagram). 
-    
-    Push the Lambda function to the cloud by running the following command:
-    ```bash
-    amplify push
-    ```
-
-3. Update the API with the new paths required for the frontend to interact with the database. 
-
-    As all of the paths for `databaseFunction` begin with `/items`, we only need to add one more path to our `mainAPI` API.\
-    To update the `mainAPI` API Gateway, run the following command, and follow the guided instructions.
-    
-    ```bash
-    amplify api update
-    
-    ? Please select from one of the below mentioned services: REST
-    ? Please select the REST API you would want to update mainAPI
-    ? What would you like to do Add another path
-    ? Provide a path (e.g., /book/{isbn}): /items
-    ? Choose a Lambda source Use a Lambda function already added in the current Amplify project
-    ? Choose the Lambda function to invoke by this path databaseFunction
     ? Restrict API access Yes
     ? Who should have access? Authenticated users only
     ? What kind of access do you want for Authenticated users? create, read, update, delete
     ? Do you want to add another path? No
     ```
     
-    Push the updated API gateway to the cloud by running the following command:
+    Open the file `amplify/backend/function/databaseFunction/src/app.js`, and inspect the file.\
+    Scrolling through it, you should notice the CRUD paths that have been automatically generated (same as the diagram). 
+    
+    Push the Lambda function and the API Gateway with the updated path to the cloud by running the following command:
     ```bash
     amplify push
     ```
     
-    Open the AWS Console, search for API Gateway, and click into the Amplify Project. You should see the new `/items` path that you have added. 
+    You have just set up the backend integration for your database. Open the AWS Console and search for Lambda and API Gateway to see the newly created function, and recently added path. 
     
-4. Connect your web application to the database via the API gateway. 
+3. Connect your web application to the database via the API gateway. 
 
    Currently, when we click 'Add' in our application, nothing happens. Let's change this.
    
