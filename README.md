@@ -20,8 +20,6 @@ Table of Contents:
   * [Provisioning your Cloud 9 IDE](#provisioning-your-cloud-9-ide)
   * [Setting up your Amplify + React application](#Setting-up-your-Amplify-React-application)
 * [Adding In-App Authentication](#Adding-In-App-Authentication)
-  * [Provisioning the Authentication service (AWS Cognito)](#Provisioning-the-Authentication-service-AWS-Cognito)
-  * [Connecting the Authentication service to your Web App](#Connecting-the-Authentication-service-to-your-Web-App)
 * [Sending data between Frontend and Backend](#Sending-data-between-Frontend-and-Backend)
   * [API Gateway](#api-gateway)
   * [Backend](#backend)
@@ -114,13 +112,17 @@ However, because the focus of this workshop is AWS, we will be providing the maj
 
 1. Goto your AWS console via this link: https://aws.amazon.com/
 
-2. Search up and click Cloud 9 in the 'Services' section.
+2. Search up 'Cloud 9' in the search bar, and click on the first option.
 
-3. Click 'Get Started'
+3. Click 'Create Environment'
 
-4. Choose a name (e.g. amplify-workshop). Click 'Next'. Under 'Instance Type' select 'Other instance type', and search for 't3.medium' in the dropdown search.
+4. Set the **name** of your environment to be 'AmplifyWorkshop'.\
+   Click 'Next Step'.\ 
+   Under 'Instance Type' select 'Other instance type', and search for 't3.medium' in the dropdown search.
 
-5. Leave everything else as default, and click 'Create Environment'.
+5. Leave everything else as default.\
+   Click 'Next Step'.\
+   Click 'Create Environment'.
 
 ### Setting up your Amplify + React application
 
@@ -133,7 +135,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
 2. Move into the cloned directory, and install all required packages. 
 
    ```bash
-   cd amplify-workshop
+   cd AWSAmplifyWorkshop
    npm install
    ```
    
@@ -147,10 +149,10 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    ```bash
    amplify init
    
-   ? Enter a name for the project: amplifyWorkshop
+   ? Enter a name for the project: AWSAmplifyWorkshop
    ? Enter a name for the environment: dev
    ? Choose your default editor: None
-   ? Choose the type of app that you're building: javascript
+   ? Choose the type of app that youre building: javascript
    
    Please tell us about your project
    ? What javascript framework are you using: react
@@ -158,7 +160,34 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    ? Distribution Directory Path: build
    ? Build Command:  npm run-script build
    ? Start Command: npm run-script start
+   
+   AWS access credentials can not be found.
+   ? Setup new user (Y/n) Yes
+   
+   Press Enter (you don't need to click the link for this one)
+   
+   Specify the AWS Region
+   ? region:  ap-southeast-2
+   Specify the username of the new IAM user:
+   ? user name:  amplify-workshop
+   Complete the user creation using the AWS console
+   
+   Click on the link that is provided
    ```
+   
+   You will get a link to configure your Identity Access Management user.\
+   Click on it, keep clicking 'Next' and leave everything default until you reach 'Create User'.\
+   Click 'Download .csv' to save your User Credentials.\
+   
+   Go back to your Cloud9.\
+   Your `accessKeyId` and `secretAccessKey` will be in the CSV file that you just downloaded.\
+   
+   ```bash
+   ? accessKeyId: ********************
+   ? secretAccessKey:  ****************************************
+   ? region:  ap-southeast-2
+   ```
+   
 
 5. To connect your React web app to Amplify, open the file `src/index.js`, and add the following code:
 
@@ -178,17 +207,17 @@ However, because the focus of this workshop is AWS, we will be providing the maj
 7. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
    Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
-**You should see a basic React web application running in your browser!**
-
+**You should see a basic Shopping List app in your browser! However, none of the functionality has been hooked iup**
 
 ## Adding In-App Authentication
 AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
 
-There are two steps to adding authentication:
-1. Provisioning the Authentication service (AWS Cognito)
-2. Connecting the Authentication service to your Web App
-
-### Provisioning the Authentication service (AWS Cognito)
+0. Add a new terminal in your Cloud 9 IDE by clicking `Window` and then 'New Terminal'
+   
+   Change directory into your Amplify project. 
+   ```bash
+   cd AWSAmplifyWorkshop
+   ```
 
 1. To add authentication to your Amplify project, run the following command, and follow the guided instructions.
 
@@ -208,29 +237,19 @@ There are two steps to adding authentication:
    
    You should see a 'status' section with 'auth' as a new component that you just created. Type 'Y' and hit enter to confirm this process.
    
-3. Congrats! Your authentication service has been created. Let's take a look at this in the Amazon Console.
+   Amplify is now provisioning the authentication service - this will take some time. 
   
-   1. Open the AWS console: https://console.aws.amazon.com/console/home
-   2. Search up 'Cognito' in the main catalog search bar, and click the first option.
-   3. Click 'Manage user pools'.
-   4. Click your Amplify project.
-   
-   This is where you can edit the settings of your application's authentication service. Feel free to explore the different settings you can adjust. 
-   
-   Click on 'Users and Groups' under 'General Settings' on the left sidebar - this is where you can track and manage your application's users.\
-   Currently, you have no users. 
-   
-### Connecting the Authentication service to your Web App
+3. While we are waiting, let's add a login / signup page in our application.
 
-4. Although our authentication service has been provisioned, we still need to add a login / signup page in our application.
-
-   To do this, open the file `src/index.js`, and import the Authenticator module by adding the following code:
+   To do this, open the file `src/index.js`, and import the Authenticator module by adding the following code **after the rest of your imports**:
    
    ```javascript
    import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
    ```
    
-   In the same file, surround the `<App />` tag with the `<AmplifyAuthenticator>` tag. It should look like this:
+   In the same file, surround the `<App />` tag with the `<AmplifyAuthenticator>` tag. 
+   
+   Essentially, replace `<App />` with the following code:
    
    ```javascript
     <AmplifyAuthenticator>
@@ -241,11 +260,18 @@ There are two steps to adding authentication:
    Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in.\
    As such, when users try to access the application, they will be redirected to a login page if they are unauthenticated. 
     
-5. Open the tab where your application is being previewed. You should now see a login screen!
-   
+4. Open the tab where your application is being previewed. You should now see a login screen!
    Follow the instructions to make an account, verify your email, and then login. 
    
-   Access the Cognito dashboard in the AWS Console (https://console.aws.amazon.com/console/home), click 'Users and Groups', and you should see the user account that you just created!
+   Let's see how this looks in the Amazon Console.
+  
+   1. Open the AWS console: https://console.aws.amazon.com/console/home
+   2. Search up 'Cognito' in the main catalog search bar, and click the first option.
+   3. Click 'Manage user pools'.
+   4. Click your Amplify project.
+   5. Click 'Users and Groups' under 'General Settings'. 
+   
+   You should see the account you just made.
    
 **Congrats! You have just set up an Authentication service, and connected it to your web application.** 
 
