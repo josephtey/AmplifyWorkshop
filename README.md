@@ -565,8 +565,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
     ? Do you want to add another path? No
     ```
     
-    Open the file `amplify/backend/function/databaseFunction/src/app.js`, and inspect the file.\
-    Scrolling through it, you should notice the CRUD paths that have been automatically generated (same as the diagram). 
+    Open the file `amplify/backend/function/databaseFunction/src/app.js`, and inspect the file. Scrolling through it, you should notice the CRUD paths that have been automatically generated (same as the diagram). 
     
     Push the Lambda function and the API Gateway with the updated path to the cloud by running the following command:
     ```bash
@@ -587,7 +586,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    import { API, Auth } from 'aws-amplify';
    ```
    
-   **The file has three empty functions: `getUserItems`, `getItem`, and `deleteItem`.** 
+   **This file has three empty functions: `getUserItems`, `getItem`, and `deleteItem`.** 
    
    ### getUserItems() Function
    This function is to fetch all the items of a specific user. The code for this function is below:
