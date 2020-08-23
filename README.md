@@ -189,9 +189,9 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    ```
    
 
-5. To connect your React web app to Amplify, open the file `src/index.js`, and add the following code:
+5. Connect your React web app to Amplify
 
-   In `src/index.js`, **after the import statements**:
+   Open the file `src/index.js`, and add the following code **after the import statements**:
    
    ```javascript
    import config from './aws-exports'
@@ -204,7 +204,9 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    npm start
    ```
    
-7. After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
+**7. Preview your Web Application**
+   
+   After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
    Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
 **You should see a basic Shopping List app in your browser! However, none of the functionality has been hooked iup**
