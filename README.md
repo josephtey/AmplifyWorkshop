@@ -103,6 +103,8 @@ There are four main components to this application
 
 These 4 components are the **basis** of almost **every** application. With these 4 components, the possibilities are endless - you will have the skills to create a forum, a task tracker, a basic social media platform, and so much more. We hope that after this workshop, you will use these core components to build something greater!
 
+#### Technologies
+We will be using **React** as our frontend framework to build this application. However, because the focus of this workshop is AWS, we will be providing the majority of the front code (aside from connecting it to our AWS backend). 
 
 ## Setting up your Development Environment
 
