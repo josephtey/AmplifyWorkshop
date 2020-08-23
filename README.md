@@ -129,7 +129,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
 1. Clone the current repository to your Cloud9 IDE.8
    
    ```bash
-   git clone
+   git clone -b frontendOnly https://github.com/josephtey/AWSAmplifyWorkshop.git
    ```
    
 2. Move into the cloned directory, and install all required packages. 
@@ -260,7 +260,8 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
    Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in.\
    As such, when users try to access the application, they will be redirected to a login page if they are unauthenticated. 
     
-4. Open the tab where your application is being previewed. You should now see a login screen!
+4. If Amplify is finished pushing the authentication service to the cloud, open the tab where your application is being previewed. 
+   You should now see a login screen!
    Follow the instructions to make an account, verify your email, and then login. 
    
    Let's see how this looks in the Amazon Console.
@@ -282,7 +283,7 @@ When building applications on the cloud, this is a simple visual depiction of a 
 
 There are four main components involved this communication flowchart. To explain how they interact with each other, I will use the analogy of how humans respond to the world around us. 
 
-It's a very hot day, and you feel hot. But why? Firstly, there's a *stimuli*: heat. Secondly, there are **sensors** on our skin that detect this high temperature. After sensing this, **neurons** throughout our body sends this information to our **brain**. Our **brain** registers that we are HOT, and then triggers a range of actions - fanning ourselves, taking off our clothes, etc. 
+It's a very hot day, and you feel hot. But why? Firstly, there's a **stimuli**: heat. Secondly, there are **sensors** on our skin that detect this high temperature. After sensing this, **neurons** throughout our body sends this information to our **brain**. Our **brain** registers that we are HOT, and then triggers a range of actions - fanning ourselves, taking off our clothes, etc. 
 
 Full-stack apps behave similarly. The user action is the stimuli - it triggers this whole process. The frontend, whether in the form of a button, a text field, etc., is the sensor - it registers the user action. The API Gateway acts as the neurons - it sends information to different places depending on the user action. And lastly, the backend is the brain - it receives these 'requests', thinks about how to respond, and then carries out certain actions.
 
@@ -325,101 +326,122 @@ Now that we understand what an API is, how our backend is configured, and how to
 ![simple-example](img/simple-example.png)
 
 **Scenario:** As a user, I want to get basic info about the application from the backend. 
-Based on the above diagram, there are 3 things we have to do:
 
-1. Create the Lambda function called `infoFunction` that returns this information. 
-   
-   To do this, run the following command, and follow the guided instructions:
+Based on the above diagram, there are 3 things we have to do:
+1. Create the API Gateway with the path `/info`.
+2. Create the Lambda function called `infoFunction` that returns this information, and connect this to the API. 
+3. Send a request to the API Gateway from our web application, and receive the info from the backend. 
+
+Let's try this in our application:
+
+Run the following command:
+```bash
+amplify api add
+```
+
+1. Create the API Gateway with the path `/info`
+
    ```bash
-   amplify function add
+   ? Please select from one of the below mentioned services: REST
+   ? Provide a friendly name for your resource to be used as a label for this category in the project: mainAPI
+   ? Provide a path (e.g., /book/{isbn}): /info
+   ```
    
-   ? Select which capability you want to add: Lambda function (serverless function)
-   ? Provide a friendly name for your resource to be used as a label for 
-   this category in the project: infoFunction
+   You have just configured your API Gateway. 
+
+2. Create the Lambda function called `infoFunction`, and connect this to the API. 
+
+   ```bash
+   ? Choose a Lambda source: Create a new Lambda function
+   ? Provide a friendly name for your resource to be used as a label for this category in the project: infoFunction
    ? Provide the AWS Lambda function name: infoFunction
    ? Choose the runtime that you want to use: NodeJS
    ? Choose the function template that you want to use: Serverless ExpressJS function (Integration with API Gateway)
    ? Do you want to access other resources in this project from your Lambda function? No
    ? Do you want to invoke this function on a recurring schedule? No
    ? Do you want to configure Lambda layers for this function? No
-   ? Do you want to edit the local lambda function now? Yes
-   ```
-   
-   Open the file `amplify/backend/function/infoFunction/src/app.js`, and inspect the file.\
-   You will notice that Amplify has already created GET, POST, PUT and DELETE methods for the 'info' resource.\
-   Find the line `app.get('/info', function(req, res) {`, and replace the corresponding code block with the following:\
-   
-   ```javascript
-   app.get('/info', function(req, res) {
-     
-     res.json({
-      "message": "I created this application during the CCA x CISSA x AWS workshop event!"
-     });
-     
-   });
-   ```
-   
-   Now, if you send a GET request to '/info', you will receive the following payload in your frontend:
-   ```json
-   {
-    "message": "I created this application during the CCA x CISSA x AWS workshop event!"
-   }
-   ```
-   
-   Push the function to the cloud by running the following command:
-   ```bash
-   amplify push
-   ```
-   
-   In the AWS console, search for Lambda, and click on `infoFunction-dev` - this is the function you just pushed to the Cloud.\
-   You can view the code of the function if you scroll down to 'Function Code'.
-   
+   ? Do you want to edit the local lambda function now? No
+   Successfully added resource infoFunction locally.
 
-2. Create the API Gateway with one path, where the resource is `/info` and the method is `GET`, and connect this to the `infoFunction` Lambda function.
-   
-   To do this, run the following command, and follow the guided instructions:
-
-   ```bash
-   amplify api add
-   
-   ? Please select from one of the below mentioned services: REST
-   ? Provide a friendly name for your resource to be used as a label for this category in the project: mainAPI
-   ? Provide a path (e.g., /book/{isbn}): /info
-   ? Choose a Lambda source Use a Lambda function already added in the current Amplify project
-   ? Choose the Lambda function to invoke by this path infoFunction
    ? Restrict API access Yes
    ? Who should have access? Authenticated users only
    ? What kind of access do you want for Authenticated users? read
    ? Do you want to add another path? No
    ```
+   
+   You have just created a Lambda function called `infoFunction` that runs on a `NodeJS` environment (javascript language).
+   
+3. Edit the `infoFunction` Lambda function so it returns info about the application
+   
+   Open the file `amplify/backend/function/infoFunction/src/app.js`, and inspect the file. You will notice that Amplify has already created GET, POST, PUT and        DELETE methods for the `info` resource. However, we are only concerned with the `GET` method of this resource. Look for this code block:
+   
+   ```javascript
+   app.get('/info', function(req, res) {
+     // Add your code here
+     res.json({success: 'get call succeed!', url: req.url});
+   });
+   ```
 
-   Push the API Gateway to the cloud by running the following command:
+   Replace that code with the following code. 
+   
+   ```javascript
+   app.get('/info', function(req, res) {
+     res.json({
+      "message": "I created this application during the CCA x CISSA x AWS workshop event!"
+     });
+   });
+   ```
+   
+   You just edited the data that is being sent back from the backend. Now, if you send a GET request to '/info', you will receive the following payload in your      frontend:
+   
+   ```json
+   {
+     "message": "I created this application during the CCA x CISSA x AWS workshop event!"
+   }
+   ```
+   
+4. Push the function to the cloud by running the following command:
    ```bash
    amplify push
    ```
    
-   In the AWS console, search for API Gateway, and click on `mainAPI` - this is the API Gateway you just pushed to the Cloud.\
-   Notice the 'info' resource that you have just created. 
+   This might take a while. 
 
+5. While we are waiting, let's connect our website to the API Gateway to get the about information. 
 
-3. Send a request to the API Gateway from our web application, and receive the info from the backend. 
-   
    Open the file `src/api/db.js`
    
-   The function `getInfo` is used to get the application info. To configure this function to send a request to our API Gateway, add the following code inside the    function:
+   To connect to the API, we need to import a module provided by Amplify. Add this to the top of your file:
    
-   ```javascript
-   const data = await API.get('mainAPI', '/info', {})
-   return data.message
+   ```bash
+   import { API } from 'aws-amplify';
    ```
    
-   As you can see in `line 1`, this uses API (an Amplify module that you imported) to send a `GET` request, to the `mainAPI` API you configured, with the resource    `/info`. The last parameter is an empty object (`{}`) because we are not sending any parameters to our API gateway.
+   The function `getAboutInfo` is used to get the application info. To configure this function to send a request to our API Gateway, replace it with the following code:
    
-   Save the file
+   ```javascript
+   export aysnc function getAboutInfo() {
+       const data = await API.get('mainAPI', '/info', {})
+       return data.message
+   }
+   ```
    
-4. Congrats! Your web app now sends a request to the API gateway, and should receive the info that is returned by the Lambda. 
-
+   **Code Breakdown**
+   - Uses API (the Amplify module that you imported) to send a `GET` request to `/info` in the `mainAPI` API that you configured. 
+   - In doing this, the API gateway will call the `infoFunction` Lambda function that you previously created.
+   - `infoFunction` will return a message back to the API, which will in turn send it back to our web application. 
+   - Lastly, I am returning the message sent back from the Lambda function. 
+   
+4. Congrats! Your web app now sends a request to the API gateway, and should receive the info that is returned by the Lambda.\
    Open the browser tab where your app is being previewed, and you should see the info populated at the top of your application!
+   
+   Let's see how this looks in the Amazon Console.
+  
+   1. Open the AWS console: https://console.aws.amazon.com/console/home
+   2. Search up 'Lambda' in the main catalog search bar, and click the first option.
+   3. Click on `infoFunction-dev`, and view the code of the function by scrolling down to `Function Code`. This is the Lambda function that you just pushed up to       the cloud. 
+   4. Click on `Services` at the top, and search for `API Gateway`, and click on `mainAPI`. This is the API Gateway you just pushed to the Cloud. Notice the 'info' resource that you have just created. 
+   
 
 Now that you understand the basics of how APIs, Lambdas and connecting everything works, let's connect a database to our application. 
 
