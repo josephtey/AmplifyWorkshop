@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
-import { Button, Grid, Paper, CircularProgress, Typography } from '@material-ui/core';
+import { Button, Grid, Paper, CircularProgress } from '@material-ui/core';
 import { getLabelsFromImage } from '../api/predictions'
 
 const PredictionsCard = ({

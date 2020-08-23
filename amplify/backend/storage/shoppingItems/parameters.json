@@ -1,7 +1,0 @@
-{
-    "tableName": "shoppingItems",
-    "partitionKeyName": "user",
-    "partitionKeyType": "S",
-    "sortKeyName": "timestamp",
-    "sortKeyType": "N"
-}

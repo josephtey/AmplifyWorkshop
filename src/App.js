@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Hub, Auth } from 'aws-amplify'
 
 import { getAboutInfo, getUserItems, deleteItem, addItem } from './api/db'
 import TableCard from './components/TableCard'
@@ -17,13 +16,6 @@ function App() {
   const [aboutInfo, setAboutInfo] = useState()
   const [items, setItems] = useState([])
   const [refresh, setRefresh] = useState(false)
-
-
-  Hub.listen('auth', (data) => {
-    if (data.payload.event === 'signIn') {
-      fetchData()
-    }
-  });
 
   useEffect(() => {
     fetchData()
@@ -43,7 +35,7 @@ function App() {
     <div className="app">
       <NavBar 
         logoutAction={async ()=>{
-          await Auth.signOut();
+          
         }}
       />
       
