@@ -84,11 +84,6 @@ We will be building a Shopping List application!
 ![app-screenshot](img/AppScreenshot.png)
 
 ### Key Features
-- Log-in / Signup
-- Fetch all the items associated to a user
-- Ability to create a new item
-- Ability to delete an existing item
-- **BONUS**: Use AI to recognise objects in images, and allow users to add those recognised objects
 
 There are four main components to this application
 1. Authentication
@@ -106,7 +101,7 @@ There are four main components to this application
    - Use AI to recognise objects in images
    - Allow users to add these recognised objects
 
-These 4 components are the **basis** of almost every application. With these 4 components, you will have the skills to make a forum, a to-do list app, even a social media platform! 
+These 4 components are the **basis** of almost **every** application. With these 4 components, the possibilities are endless - you will have the skills to create a forum, a task tracker, a basic social media platform, and so much more. We hope that after this workshop, you will use these core components to build something greater!
 
 
 ## Setting up your Development Environment
