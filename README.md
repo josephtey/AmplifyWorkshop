@@ -164,7 +164,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    AWS access credentials can not be found.
    ? Setup new user (Y/n) Yes
    
-   Press Enter (you don't need to click the link for this one)
+   Press Enter (you dont need to click the link for this one)
    
    Specify the AWS Region
    ? region:  ap-southeast-2
