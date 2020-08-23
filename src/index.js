@@ -9,6 +9,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import * as serviceWorker from './serviceWorker';
 import Amplify from 'aws-amplify'
 import CssBaseline from "@material-ui/core/CssBaseline";
+import orange from '@material-ui/core/colors/orange';
+
 
 Amplify.configure(config)
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
@@ -16,6 +18,7 @@ Amplify.addPluggable(new AmazonAIPredictionsProvider());
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
+    primary: orange,
   }
 });
 

@@ -40,12 +40,12 @@
                 "AttributeDefinitions": [
                   
                   {
-                      "AttributeName": "user",
-                      "AttributeType": "S"
+                      "AttributeName": "timestamp",
+                      "AttributeType": "N"
                   }  , 
                   
                   {
-                      "AttributeName": "id",
+                      "AttributeName": "user",
                       "AttributeType": "S"
                   } 
                   
@@ -58,7 +58,7 @@
                   }  , 
                   
                   {
-                    "AttributeName": "id",
+                    "AttributeName": "timestamp",
                     "KeyType": "RANGE"
                   } 
                   

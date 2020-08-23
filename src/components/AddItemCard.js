@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { TextField, Button, Grid, Paper } from '@material-ui/core';
-import { v4 as uuidv4 } from 'uuid';
 
 const NavBar = ({
   addAction
@@ -27,8 +26,7 @@ const NavBar = ({
             variant="contained" 
             color="primary"
             onClick={()=>{
-              const id = uuidv4();
-              addAction(id, taskName)
+              addAction(taskName)
             }}
           >
             Add

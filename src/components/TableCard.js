@@ -19,15 +19,15 @@ const TableCard = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map( task => {
+            {data.map( item => {
               return (
                 <TableRow>
                   <TableCell>
-                    {task.itemName}
+                    {item.itemName}
                   </TableCell>
                   <TableCell align="right">
                     <IconButton
-                      onClick={()=>removeAction(task.id)}
+                      onClick={()=>removeAction(item.timestamp)}
                     > 
                       <DeleteIcon />
                     </IconButton>
@@ -38,7 +38,7 @@ const TableCard = ({
               
           </TableBody>
         </Table>
-      : <Typography>You have not created any tasks</Typography>}
+      : <Typography>You have not created any items</Typography>}
     </Paper>
     </Grid>
   )

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Hub, Auth } from 'aws-amplify'
 
-import { getAboutInfo, getUserTasks, removeTask, addTask } from './api/db'
+import { getAboutInfo, getUserItems, deleteItem, addItem } from './api/db'
 import TableCard from './components/TableCard'
 import NavBar from './components/NavBar'
 import AddItemCard from './components/AddItemCard'
@@ -15,13 +15,13 @@ import { Grid } from '@material-ui/core'
 function App() {
 
   const [aboutInfo, setAboutInfo] = useState()
-  const [userTasks, setUserTasks] = useState([])
+  const [items, setItems] = useState([])
   const [refresh, setRefresh] = useState(false)
 
 
   Hub.listen('auth', (data) => {
     if (data.payload.event === 'signIn') {
-      setRefresh(!refresh)
+      fetchData()
     }
   });
 
@@ -33,10 +33,10 @@ function App() {
 
   async function fetchData() {
     const about = await getAboutInfo()
-    const tasks = await getUserTasks()
+    const tasks = await getUserItems()
 
     setAboutInfo(about)
-    setUserTasks(tasks)
+    setItems(tasks)
   }
 
   return (
@@ -55,37 +55,30 @@ function App() {
             
             <AddItemCard 
             addAction = {
-              (id, itemName) => {
-                addTask(id, itemName)
+              (itemName) => {
+                addItem(itemName)
                 setRefresh(!refresh)
               }
             }      />
             
             <PredictionsCard 
               addAction = {
-                (id, itemName) => {
-                  addTask(id, itemName)
+                (itemName) => {
+                  addItem(itemName)
                   setRefresh(!refresh)
                 }
-                }
+              }
             />
             
            <TableCard 
-              data={userTasks}
-              removeAction={(id)=>{
-                removeTask(id)
+              data={items}
+              removeAction={(timestamp)=>{
+                deleteItem(timestamp)
                 setRefresh(!refresh)
               }}
             />
         </Grid>
       </div>
-      
-      
-      
-      {/*
-      
-      
-      */}
     </div>
   );
 }

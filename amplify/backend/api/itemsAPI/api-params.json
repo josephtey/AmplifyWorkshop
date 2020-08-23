@@ -11,6 +11,16 @@
             }
         },
         {
+            "name": "/test",
+            "lambdaFunction": "amplifyworkshopf930a679",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET"
+                ]
+            }
+        },
+        {
             "name": "/items",
             "lambdaFunction": "databaseFunction",
             "privacy": {
@@ -23,16 +33,6 @@
                     "/DELETE"
                 ]
             }
-        },
-        {
-            "name": "/test",
-            "lambdaFunction": "amplifyworkshopf930a679",
-            "privacy": {
-                "private": true,
-                "auth": [
-                    "/GET"
-                ]
-            }
         }
     ],
     "resourceName": "itemsAPI",
@@ -42,10 +42,10 @@
             "lambdaFunction": "infoFunction"
         },
         {
-            "lambdaFunction": "databaseFunction"
+            "lambdaFunction": "amplifyworkshopf930a679"
         },
         {
-            "lambdaFunction": "amplifyworkshopf930a679"
+            "lambdaFunction": "databaseFunction"
         }
     ],
     "privacy": {
@@ -65,7 +65,7 @@
         },
         {
             "category": "function",
-            "resourceName": "databaseFunction",
+            "resourceName": "amplifyworkshopf930a679",
             "attributes": [
                 "Name",
                 "Arn"
@@ -73,12 +73,12 @@
         },
         {
             "category": "function",
-            "resourceName": "amplifyworkshopf930a679",
+            "resourceName": "databaseFunction",
             "attributes": [
                 "Name",
                 "Arn"
             ]
         }
     ],
-    "uuid": "1e2b2e52"
+    "uuid": "8df2811c"
 }

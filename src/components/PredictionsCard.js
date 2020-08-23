@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
-import { Button, Grid, Paper, CircularProgress } from '@material-ui/core';
-import { Predictions } from 'aws-amplify';
-import { v4 as uuidv4 } from 'uuid';
+import { Button, Grid, Paper, CircularProgress, Typography } from '@material-ui/core';
+import { getLabelsFromImage } from '../api/predictions'
 
 const PredictionsCard = ({
   addAction
@@ -11,28 +10,12 @@ const PredictionsCard = ({
   const [loading, setLoading] = useState(false)
   const [fileName, setFileName] = useState(null)
 
-  const getLabelsFromImage = async(file) => {
-    let predictions = await Predictions.identify({
-      labels: {
-        source: {
-          file,
-        },
-        type: "ALL"
-      }
-    })
-
-    predictions = predictions.labels.map(item => {
-      return item.name
-    })
-
-    setLabels(predictions)
-  }
-
-
-
   return (
     <Grid item xs={12}>
         <Paper className="card">
+          <Grid item xs={12} style={{paddingBottom: '10px'}}>
+            <b>Use AI Predictions to Add New Items</b>
+          </Grid>
           <Grid item xs={12}>
             <Button
               variant="contained"
@@ -50,14 +33,12 @@ const PredictionsCard = ({
                     return
                   }
                   
-                  try {
-                    setFileName(file.name)
-                    setLoading(true)
-                    await getLabelsFromImage(file)
-                    setLoading(false)
-                  } catch (err) {
-                    alert(err)
-                  }
+                  setFileName(file.name)
+                  setLoading(true)
+                  
+                  setLabels(await getLabelsFromImage(file))
+                  
+                  setLoading(false)
                 }}
               />
             </Button>
@@ -70,8 +51,7 @@ const PredictionsCard = ({
               labels.map(label => (
                 <Button
                   onClick={()=>{
-                    const id = uuidv4();
-                    addAction(id, label)
+                    addAction(label)
                   }}
                 >{label}</Button>
               ))

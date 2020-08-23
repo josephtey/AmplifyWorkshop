@@ -7,30 +7,32 @@ export async function getAboutInfo() {
     return data.message
 }
 
-export async function getUserTasks() {
+export async function getUserItems() {
     const userData = await Auth.currentAuthenticatedUser()
     const data = await API.get('itemsAPI', '/items/' + userData.username, {})
 
     return data
 }
 
-export async function addTask(id, itemName) {
+export async function addItem(itemName) {
     const userData = await Auth.currentAuthenticatedUser()
 
+    const newItem = {
+        timestamp: new Date().getTime(),
+        user: userData.username,
+        itemName
+    }
+
     const response = await API.post('itemsAPI', '/items', {
-        body: {
-            id,
-            user: userData.username,
-            itemName
-        }
+        body: newItem
     })
 
     return response
 }
 
-export async function removeTask(id) {
+export async function deleteItem(timestamp) {
     const userData = await Auth.currentAuthenticatedUser()
-    const response = await API.del('itemsAPI', '/items/object/' + userData.username + '/' + id, {})
+    const response = await API.del('itemsAPI', '/items/object/' + userData.username + '/' + timestamp, {})
 
     return response
 }
