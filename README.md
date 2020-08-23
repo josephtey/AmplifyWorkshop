@@ -204,7 +204,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    npm start
    ```
    
-**7. Preview your Web Application**
+7. Preview your Web Application
    
    After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
    Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
@@ -214,6 +214,11 @@ However, because the focus of this workshop is AWS, we will be providing the maj
 ## Adding In-App Authentication
 AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
 
+There are two steps to adding authentication:
+
+1. Provisioning the Authentication service (AWS Cognito)
+2. Connecting the Authentication service to your Web App
+
 0. Add a new terminal in your Cloud 9 IDE by clicking `Window` and then 'New Terminal'
    
    Change directory into your Amplify project. 
@@ -221,17 +226,18 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
    cd AWSAmplifyWorkshop
    ```
 
-1. To add authentication to your Amplify project, run the following command, and follow the guided instructions.
+1. Provisioning the Cognito authentication service:
+    
+   Run the following command, and follow the guided instructions:
+   ```bash
+   amplify auth add
 
-    ```bash
-    amplify auth add
+   Do you want to use the default authentication and security configuration? Default configuration
+   How do you want users to be able to sign in? Username
+   Do you want to configure advanced settings?  No, I am done.
+   ```    
     
-    Do you want to use the default authentication and security configuration? Default configuration
-    How do you want users to be able to sign in? Username
-    Do you want to configure advanced settings?  No, I am done.
-    ```    
-    
-2. To push it to the Cloud, run the following command:
+   To push it to the Cloud, run the following command:
 
    ```bash
    amplify push
@@ -241,16 +247,15 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
    
    Amplify is now provisioning the authentication service - this will take some time. 
   
-3. While we are waiting, let's add a login / signup page in our application.
-
-   To do this, open the file `src/index.js`, and import the Authenticator module by adding the following code **after the rest of your imports**:
+3. Add a login and signup page to our Web Application (while we are waiting for the service to be provisioned).
+   
+   Open the file `src/index.js`, and import the Authenticator module by adding the following code **after the rest of your imports**. This module includes the UI components for our login and sign up page:
    
    ```javascript
    import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
    ```
    
    In the same file, surround the `<App />` tag with the `<AmplifyAuthenticator>` tag. 
-   
    Essentially, replace `<App />` with the following code:
    
    ```javascript
@@ -259,10 +264,11 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
     </AmplifyAuthenticator>
     ```
     
-   Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in.\
-   As such, when users try to access the application, they will be redirected to a login page if they are unauthenticated. 
+   Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in. As such, when users try to access the application, they will be redirected to a login page if they are unauthenticated. 
    
-4. To add a **log-out** button, open the file `src/components/NavBar.js`, as the log-out button is located in the Navigation Bar. 
+4. Add a log out button.
+   
+   Open the file `src/components/NavBar.js`, as the log-out button is located in the Navigation Bar. 
    
    We need to import an authentication module that will allow us to perform tasks related to authentication, including sign-out. Add this to the top of your code:
    
@@ -277,11 +283,11 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
    }}
    ```
     
-4. If Amplify is finished pushing the authentication service to the cloud, open the tab where your application is being previewed. 
-   You should now see a login screen!
-   Follow the instructions to make an account, verify your email, and then login. 
+4. Preview updated application.
    
-   Let's see how this looks in the Amazon Console.
+   If Amplify is finished pushing the authentication service to the cloud, open the tab where your application is being previewed. You should now see a login screen! Follow the on-screen instructions to make an account, verify your email, and then login. 
+   
+   Let's see what you just did in the Amazon Console.
   
    1. Open the AWS console: https://console.aws.amazon.com/console/home
    2. Search up 'Cognito' in the main catalog search bar, and click the first option.
@@ -433,7 +439,7 @@ amplify api add
    4. Click on `Services` at the top, and search for `API Gateway`, and click on `mainAPI`. This is the API Gateway you just pushed to the Cloud. Notice the 'info' resource that you have just created. 
    
 
-5. Connect our website to the API Gateway to get the about information. 
+5. Connect our Web Application to the API Gateway to get the about info. 
 
    Open the file `src/api/db.js` - this file is responsible for retrieving and sendinng data to our API. 
    
@@ -457,8 +463,9 @@ amplify api add
    - In doing this, the API gateway will call the `infoFunction` Lambda function that you previously created.
    - `infoFunction` will return a message back to the API, which will in turn send it back to our web application. 
    
-4. Congrats! Your web app now sends a request to the API gateway, and should receive the info that is returned by the Lambda.\
-   Open the browser tab where your app is being previewed, and you should see the info populated at the top of your application!
+4. Preview updated application.
+
+   Congrats! Your web app now sends a request to the API gateway, and should receive the info that is returned by the Lambda. Open the browser tab where your app is being previewed, and you should see the info populated at the top of your application!
    
 Now that you understand the basics of how APIs, Lambdas and connecting everything works, let's connect a database to our application. 
 
@@ -576,7 +583,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
     
     You have just set up the backend integration for your database. Open the AWS Console and search for Lambda and API Gateway to see the newly created function, and recently added path. 
     
-3. Connect your web application to the database via the API gateway. 
+3. Connect your Web Application to the database via the API gateway. 
 
    Currently, when we click 'Add' in our application, nothing happens. Let's change this.
    
