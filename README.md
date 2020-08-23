@@ -477,8 +477,6 @@ DynamoDB tables require a primary key to uniquely identify each item in the tabl
 1. **Partition Key** is `user`. This allows us to **partition** our queries based on the `user` column, so we can display items relevant to only the logged-in user. 
 2. **Sort Key** is `timestamp`. This allows us to **sort** our table based on creation time. 
 
-Before you create the database, you must specify how items in your table are uniquely organized. You do this by specifying a primary key. The primary key uniquely identifies each item in the table so that no two items can have the same key. This can be an individual column, or a combination that includes a primary key and a sort key.
-
 ### Implementing the Database
 
 ![database-flow](img/database-flow.png)
