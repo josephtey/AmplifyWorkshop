@@ -177,10 +177,10 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    
    You will get a link to configure your Identity Access Management user.\
    Click on it, keep clicking 'Next' and leave everything default until you reach 'Create User'.\
-   Click 'Download .csv' to save your User Credentials.\
+   Click 'Download .csv' to save your User Credentials.
    
    Go back to your Cloud9.\
-   Your `accessKeyId` and `secretAccessKey` will be in the CSV file that you just downloaded.\
+   Your `accessKeyId` and `secretAccessKey` will be in the CSV file that you just downloaded.
    
    ```bash
    ? accessKeyId: ********************
@@ -209,15 +209,16 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    After the app has compiled successfully, click 'Tools' in the toolbar up top, click 'Preview' and finally click 'Preview Running Application'. 
    Open the preview in another tab by clicking the arrow / box button on the right of the search bar. 
 
-**You should see a basic Shopping List app in your browser! However, none of the functionality has been hooked iup**
+**You should see a basic Shopping List app in your browser! However, there is currently no functionality. Let's use AWS to fix this!**
 
 ## Adding In-App Authentication
 AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
 
 There are two steps to adding authentication:
-
 1. Provisioning the Authentication service (AWS Cognito)
 2. Connecting the Authentication service to your Web App
+
+With Amplify, this is super simple, so let's start:
 
 0. Add a new terminal in your Cloud 9 IDE by clicking `Window` and then 'New Terminal'
    
@@ -226,7 +227,7 @@ There are two steps to adding authentication:
    cd AWSAmplifyWorkshop
    ```
 
-1. Provisioning the Cognito authentication service:
+1. Provision the Cognito authentication service:
     
    Run the following command, and follow the guided instructions:
    ```bash
@@ -370,8 +371,6 @@ amplify api add
    ? Provide a friendly name for your resource to be used as a label for this category in the project: mainAPI
    ? Provide a path (e.g., /book/{isbn}): /info
    ```
-   
-   You have just configured your API Gateway. 
 
 2. Create the Lambda function called `infoFunction`, and connect this to the API. 
 
@@ -397,7 +396,7 @@ amplify api add
    
 3. Edit the `infoFunction` Lambda function so it returns info about the application
    
-   Open the file `amplify/backend/function/infoFunction/src/app.js`, and inspect the file. You will notice that Amplify has already created GET, POST, PUT and        DELETE methods for the `info` resource. However, we are only concerned with the `GET` method of this resource. Look for this code block:
+   Open the file `amplify/backend/function/infoFunction/src/app.js`, and inspect the file. You will notice that Amplify has already created `GET`, `POST`, `PUT` and `DELETE` methods for the `info` resource. However, we are only concerned with the `GET` method of this resource. Look for this code block:
    
    ```javascript
    app.get('/info', function(req, res) {
@@ -449,6 +448,7 @@ amplify api add
    import { API } from 'aws-amplify';
    ```
    
+   ### getAboutInfo() Function
    The function `getAboutInfo` is used to get the application info. To configure this function to send a request to our API Gateway, replace it with the following code:
    
    ```javascript
