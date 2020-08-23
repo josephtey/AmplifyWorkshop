@@ -259,6 +259,21 @@ AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a rob
     
    Any content you surround `<AmplifyAuthenticator>` with will require authentication / users to log-in.\
    As such, when users try to access the application, they will be redirected to a login page if they are unauthenticated. 
+   
+4. To add a **log-out** button, open the file `src/components/NavBar.js`, as the log-out button is located in the Navigation Bar. 
+   
+   We need to import an authentication module that will allow us to perform tasks related to authentication, including sign-out. Add this to the top of your code:
+   
+   ```javascript
+   import { Auth } from 'aws-amplify';
+   ```
+   
+   Look for the Log out button, and replace the 'onClick' function with the following code:
+   ```javascript
+   onClick={async ()=>{
+       await Auth.signOut();
+   }}
+   ```
     
 4. If Amplify is finished pushing the authentication service to the cloud, open the tab where your application is being previewed. 
    You should now see a login screen!
@@ -420,7 +435,7 @@ amplify api add
 
    Open the file `src/api/db.js` - this file is responsible for retrieving and sendinng data to our API. 
    
-   To connect to the API, we need to import a module provided by Amplify. Add this to the top of your file:
+   To connect to the API, we need to import a module provided by Amplify. This module allows us to easily communicate with the API. Add this to the top of your file:
    
    ```bash
    import { API } from 'aws-amplify';
