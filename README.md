@@ -338,7 +338,7 @@ Run the following command:
 ```bash
 amplify api add
 ```
-**You will now be asked a series of questions by Amplify: **
+**You will now be asked a series of questions by Amplify:**
 
 1. Create the API Gateway with the path `/info`
 
