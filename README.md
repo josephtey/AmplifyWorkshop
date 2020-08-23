@@ -127,7 +127,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
 1. Clone the current repository to your Cloud9 IDE.8
    
    ```bash
-   git clone
+   git clone -b frontendOnly https://github.com/josephtey/AWSAmplifyWorkshop.git
    ```
    
 2. Move into the cloned directory, and install all required packages. 
