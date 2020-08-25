@@ -1,3 +1,5 @@
+![poster](#img/serverlessposter.jpg)
+
 # Build a Fullstack + Serverless Web App using AWS Amplify 
 
 Welcome! This is a beginner workshop targetted at University students (studying IT / Computer Science) who are new to Amazon Web Services. The main question we seek to answer by the end of this workshop is: 
