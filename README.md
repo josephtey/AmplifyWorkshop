@@ -32,6 +32,20 @@ Table of Contents:
 * [Publishing our Web Application](#publish-our-web-application)
 * [Adding Machine Learning Features](#Adding-Machine-Learning-Features)
 
+## Definitions
+|Term|Description|
+|----|-----------|
+|AWS| Amazon Web Services|
+|S3| Simple Storage Solution, object storage service, also can be used to host static websites|
+|Cognito|  Identity management, simplfy the creation and management of users and group, also enables identity|fedation with OpenIDC Connect and Social logins ( Google, FaceBook and Amazon )|
+|Cloud 9| An IDE that runs in a browser inside your AWS account.|
+|Lambda| AWS's servlerss option, upload code that runs without users needed to provision servers.|
+|DynamoDB| Fully managed key value and document database|
+|region| A geographic location where AWS has data centers|
+|API Gateway| A proxy to aws services that enables an authentigation check point|
+
+
+
 ## Workshop Theory
 As a University student, you may have had some experience creating small, mini applications as part of your assessments - for example, random websites, algorithmic chunks of code, or just random python scripts. But you may be wondering, how are industrial, fully-fledged applications, such as Facebook, Google or even Github, actually built? 
 
@@ -63,7 +77,7 @@ Building cloud-native fullstack web applications have several benefits:
 
    1. **AWS S3**: A file storage service - can be used for hosting your frontend website, as well as other files / attachments. 
    2. **AWS Cognito**: An authentication service - handles user registration, authentication, stores data about all your users + more. 
-   3. **AWS API Gateway**: Acts as the 'front door' for websites to access data, business logic, and other functionality from your backend. 
+   3. **AWS API Gateway**: Acts as the 'front door' for the backend to access data, business logic, and other functionality. 
    4. **AWS Lambda**: Lets you run code (in the backend) without provisoning or mangaging servers. 
    5. **AWS DynamoDB**: A database solution that lets you store data without provisoning or mangaging servers. 
 
