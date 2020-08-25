@@ -96,6 +96,7 @@ We will be building a Shopping List application!
 **Link**: https://dev.d2jld5htjwnhsz.amplifyapp.com
 
 ![app-screenshot](img/AppScreenshot.png)
+![ml-feature](img/MLFeature.gif)
 
 ### Key Features
 
