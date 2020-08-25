@@ -1,4 +1,4 @@
-![poster](#img/serverlessposter.jpg)
+![poster](img/serverlessposter.jpg)
 
 # Build a Fullstack + Serverless Web App using AWS Amplify 
 
