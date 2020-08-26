@@ -104,8 +104,8 @@ We will be building a Shopping List application!
 
 There are four main components to this application
 1. Authentication
-   - Ability to log-in
-   - Ability to sign-up
+   - Ability to log-in, sign up, forget password - all basic 'authentication' operations. 
+   - Ability to log-in with external providers, such as Google, Microsoft, Facebook, etc. 
    - You must be authenticated to make requests to the backend
 2. A fullstack app architecture with a frontend and backend
    - API that acts as the 'front door' to the backend
@@ -207,6 +207,13 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    ? accessKeyId: ********************
    ? secretAccessKey:  ****************************************
    ? region:  ap-southeast-2
+   ? Profile Name:  default
+   
+   Successfully set up the new user.
+   For more information on AWS Profiles, see: https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html
+   
+   ? Do you want to use an AWS profile? Yes
+   ? Please choose the profile you want to use: default
    ```
    
 
@@ -461,7 +468,7 @@ amplify api add
 
 5. Connect our Web Application to the API Gateway to get the about info. 
 
-   Open the file `src/api/db.js` - this file is responsible for retrieving and sendinng data to our API. 
+   Open the file `src/api/db.js` - this file is responsible for retrieving and sending data to our API. 
    
    To connect to the API, we need to import a module provided by Amplify. This module allows us to easily communicate with the API. Add this to the top of your file:
    
