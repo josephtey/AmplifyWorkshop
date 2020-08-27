@@ -215,19 +215,20 @@ However, because the focus of this workshop is AWS, we will be providing the maj
    ? Do you want to use an AWS profile? Yes
    ? Please choose the profile you want to use: default
    ```
-   
+   After this step some deployment resources are created in AWS including a deployment bucket and roles.
 
-5. Connect your React web app to Amplify
+5. Connect your React web app to Amplify.
 
-   Open the file `src/index.js`, and add the following code **after the import statements**:
+   Using Cloud9 expand the AWSApmplifyWorkshop folder and open the file `src/index.js`, and add the following code **after the import statements**:
    
    ```javascript
    import config from './aws-exports'
    import Amplify from 'aws-amplify'
    Amplify.configure(config)
    ```
+   The save the file.
 
-6. Run the React application
+6. Run the React application locally
    ```bash
    npm start
    ```
@@ -240,7 +241,7 @@ However, because the focus of this workshop is AWS, we will be providing the maj
 **You should see a basic Shopping List app in your browser! However, there is currently no functionality. Let's use AWS to fix this!**
 
 ## Adding In-App Authentication
-AWS Amplify uses AWS Cognito as its authentication service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
+AWS Amplify uallows us to quickly leverage AWS Cognito as its identity service. AWS Cognito is a robust user directory service that handles user registration, authentication, account recovery & other operations. 
 
 There are two steps to adding authentication:
 1. Provisioning the Authentication service (AWS Cognito)
@@ -451,7 +452,7 @@ amplify api add
    }
    ```
    
-4. Push the function to the cloud by running the following command:
+4. Save the file and Push the function to the cloud by running the following command:
    ```bash
    amplify push
    ```
@@ -559,7 +560,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    amplify push
    ```
    
-   In the AWS console, search for DynamoDB, and click on `items-dev` - this is the table you just pushed to the Cloud. Currently, it should be empty.
+   In the AWS console, search for DynamoDB or click this [deep link](https://ap-southeast-2.console.aws.amazon.com/dynamodb/home?region=ap-southeast-2#), and click on "tables" on the left then `items-dev` - this is the table you just pushed to the Cloud. You can click on the "Items" tab to see the data. Currently, it should be empty.  
 
 2. Create the Lambda function called `databaseFunction` to interact with the DynamoDB Table, and hook it up to the API. 
 
@@ -619,6 +620,11 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    
    Since we need to connect to the API, we need the API module from the Amplify library - this is already imported. We also need to get the **username** of the currently authenticated user, so we also need to import the Auth module. To do this, add the import after the API module:
    
+   Replace:
+   ```javascript
+   import { API, } from 'aws-amplify';
+   ```
+   with
    ```javascript
    import { API, Auth } from 'aws-amplify';
    ```
@@ -676,8 +682,13 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    **Code Breakdown**
    - Sends a `DELETE` request to the `mainAPI` API you configured, with the resource `/items`. We specify the username and timestamp, as the combination of both will uniquely identify an item. 
    
+6. Push the changes
+```bash
+amplify push
+```
 5. Congrats! You have successfully setup a Dynamo DB Table, and hooked it up to your web application. 
-   Open the browser tab where your app is being previewed, and you should be able to get, create and delete items! 
+   Open the browser tab where your app is being previewed, and you should be able to get, create and delete items!
+
 
 ## Publishing our Web Application
 We've finished our application! However, one problem - our application is still running locally on our Cloud9 instance. 
