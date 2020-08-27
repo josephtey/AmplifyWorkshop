@@ -562,7 +562,7 @@ Based on the diagram, we have to provision the database, create a new Lambda fun
    amplify push
    ```
    
-   In the AWS console, search for DynamoDB or click this [deep link](#https://ap-southeast-2.console.aws.amazon.com/dynamodb/home?region=ap-southeast-2).\
+   In the AWS console, search for DynamoDB or [click this](https://ap-southeast-2.console.aws.amazon.com/dynamodb/home?region=ap-southeast-2).\
    Click on "tables" on the left then `items-dev` - this is the table you just pushed to the Cloud.\
    You can click on the "Items" tab to see the data. Currently, it should be empty.  
 
