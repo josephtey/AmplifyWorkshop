@@ -20,8 +20,7 @@ const NavBar = ({
             fullWidth
           >
           </TextField>
-        <div style={{float: 'right', paddingTop: '15px', display: 'flex'}}>
-          {/* <AudioRecorder finishRecording={convertFromBuffer} /> */}
+        <div style={{float: 'right', paddingTop: '15px', display: 'flex'}}>\
           <Button
             variant="contained" 
             color="primary"
