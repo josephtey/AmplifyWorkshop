@@ -1,5 +1,3 @@
-export async function getAboutInfo() {}
-
 export async function getUserItems() {
     return []
 }

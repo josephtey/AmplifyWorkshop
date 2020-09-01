@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
-import { getAboutInfo, getUserItems, deleteItem, addItem } from './api/db'
+import { getUserItems, deleteItem, addItem } from './api/db'
 import TableCard from './components/TableCard'
 import NavBar from './components/NavBar'
 import AddItemCard from './components/AddItemCard'
-import AboutCard from './components/AboutCard'
 import PredictionsCard from './components/PredictionsCard'
+import AboutCard from './components/AboutCard'
 
 import { Grid } from '@material-ui/core'
 
 
 function App() {
 
-  const [aboutInfo, setAboutInfo] = useState()
   const [items, setItems] = useState([])
   const [refresh, setRefresh] = useState(false)
 
@@ -24,25 +23,18 @@ function App() {
 
 
   async function fetchData() {
-    const about = await getAboutInfo()
-    const tasks = await getUserItems()
-
-    setAboutInfo(about)
-    setItems(tasks)
+    setItems(await getUserItems())
   }
 
   return (
     <div className="app">
-      <NavBar 
-        logoutAction={async ()=>{
-          
-        }}
-      />
+      <NavBar />
       
       <div className="content">
         <Grid container spacing={3}>
+        
             <AboutCard 
-              text = { aboutInfo }
+              text = "This is an application I made during CCA x CISSA's AWS event!"
               />
             
             <AddItemCard 

@@ -1,11 +1,11 @@
 import React from 'react';
 import '../App.css';
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { Auth } from 'aws-amplify';
 
 
-const NavBar = ({
-  logoutAction
-}) => {
+
+const NavBar = () => {
   return (
     <AppBar position="static">
           <Toolbar>
@@ -13,10 +13,11 @@ const NavBar = ({
               Smart Shopping List
             </Typography>
             <Button color="inherit"
-              onClick={async ()=>{
-              }}
+               onClick={async ()=>{
+                  await Auth.signOut();
+               }}
             >
-              Logout
+               Logout
             </Button>
           </Toolbar>
         </AppBar>
