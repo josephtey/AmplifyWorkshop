@@ -14,12 +14,11 @@ import { Grid } from '@material-ui/core'
 function App() {
 
   const [items, setItems] = useState([])
-  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     fetchData()
 
-  }, [refresh])
+  }, [])
 
 
   async function fetchData() {
@@ -37,28 +36,43 @@ function App() {
               text = "This is an application I made during CCA x CISSA's AWS event!"
               />
             
-            <AddItemCard 
+             <AddItemCard 
             addAction = {
-              (itemName) => {
-                addItem(itemName)
-                setRefresh(!refresh)
+              async (itemName) => {
+                const response = await addItem(itemName)
+                
+                if (response){
+                  setItems([...items, {
+                    timestamp: new Date().getTime(),
+                    itemName
+                  }])  
+                }
+                
               }
             }      />
             
             <PredictionsCard 
               addAction = {
-                (itemName) => {
-                  addItem(itemName)
-                  setRefresh(!refresh)
+                async (itemName) => {
+                  const response = await addItem(itemName)
+                
+                  if (response){
+                    setItems([...items, {
+                      timestamp: new Date().getTime(),
+                      itemName
+                    }])
+                  }
                 }
               }
             />
             
            <TableCard 
               data={items}
-              removeAction={(timestamp)=>{
-                deleteItem(timestamp)
-                setRefresh(!refresh)
+              removeAction={async (timestamp)=>{
+                const response = await deleteItem(timestamp)
+                if (response) {
+                  setItems(items.filter(item => item.timestamp !== timestamp))  
+                }
               }}
             />
         </Grid>
