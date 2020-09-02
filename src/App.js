@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Hub, Auth } from 'aws-amplify'
 
-import { getAboutInfo, getUserItems, deleteItem, addItem } from './api/db'
+import {getUserItems, deleteItem, addItem } from './api/db'
 import TableCard from './components/TableCard'
 import NavBar from './components/NavBar'
 import AddItemCard from './components/AddItemCard'
@@ -14,9 +14,7 @@ import { Grid } from '@material-ui/core'
 
 function App() {
 
-  const [aboutInfo, setAboutInfo] = useState()
   const [items, setItems] = useState([])
-  const [refresh, setRefresh] = useState(false)
 
 
   Hub.listen('auth', (data) => {
@@ -28,15 +26,11 @@ function App() {
   useEffect(() => {
     fetchData()
 
-  }, [refresh])
+  }, [])
 
 
   async function fetchData() {
-    const about = await getAboutInfo()
-    const tasks = await getUserItems()
-
-    setAboutInfo(about)
-    setItems(tasks)
+    setItems(await getUserItems())
   }
 
   return (
@@ -50,14 +44,17 @@ function App() {
       <div className="content">
         <Grid container spacing={3}>
             <AboutCard 
-              text = { aboutInfo }
+              text = "Welcome to my Smart Shopping List app. I made this during CISSA x CCA's AWS event."
               />
             
             <AddItemCard 
             addAction = {
               (itemName) => {
                 addItem(itemName)
-                setRefresh(!refresh)
+                setItems([...items, {
+                  timestamp: new Date().getTime(),
+                  itemName
+                }])
               }
             }      />
             
@@ -65,7 +62,11 @@ function App() {
               addAction = {
                 (itemName) => {
                   addItem(itemName)
-                  setRefresh(!refresh)
+                  
+                  setItems([...items, {
+                    timestamp: new Date().getTime(),
+                    itemName
+                  }])
                 }
               }
             />
@@ -74,7 +75,7 @@ function App() {
               data={items}
               removeAction={(timestamp)=>{
                 deleteItem(timestamp)
-                setRefresh(!refresh)
+                setItems(items.filter(item => item.timestamp !== timestamp))
               }}
             />
         </Grid>

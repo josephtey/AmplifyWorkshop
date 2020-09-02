@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
 
 app.get('/info', function(req, res) {
   // Add your code here
-  res.json({ message: "Hi guys! Welcome to my Homework Tracker app. I made this during CISSA x CCA's AWS event!" });
+  res.json({ message: "Welcome to my Smart Shopping List app. I made this during CISSA x CCA's AWS event." });
 });
 
 app.get('/info/*', function(req, res) {
