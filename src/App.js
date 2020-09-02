@@ -49,33 +49,41 @@ function App() {
             
             <AddItemCard 
             addAction = {
-              (itemName) => {
-                addItem(itemName)
-                setItems([...items, {
-                  timestamp: new Date().getTime(),
-                  itemName
-                }])
+              async (itemName) => {
+                const response = await addItem(itemName)
+                
+                if (response){
+                  setItems([...items, {
+                    timestamp: new Date().getTime(),
+                    itemName
+                  }])  
+                }
+                
               }
             }      />
             
             <PredictionsCard 
               addAction = {
-                (itemName) => {
-                  addItem(itemName)
-                  
-                  setItems([...items, {
-                    timestamp: new Date().getTime(),
-                    itemName
-                  }])
+                async (itemName) => {
+                  const response = await addItem(itemName)
+                
+                  if (response){
+                    setItems([...items, {
+                      timestamp: new Date().getTime(),
+                      itemName
+                    }])
+                  }
                 }
               }
             />
             
            <TableCard 
               data={items}
-              removeAction={(timestamp)=>{
-                deleteItem(timestamp)
-                setItems(items.filter(item => item.timestamp !== timestamp))
+              removeAction={async (timestamp)=>{
+                const response = await deleteItem(timestamp)
+                if (response) {
+                  setItems(items.filter(item => item.timestamp !== timestamp))  
+                }
               }}
             />
         </Grid>
