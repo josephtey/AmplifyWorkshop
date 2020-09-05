@@ -28,6 +28,11 @@ const PredictionsCard = ({
                 onChange={async (event)=>{
                   const file = event.target.files[0]
                   
+                  if (file.size > 5000000) {
+                    alert("Image is too large!")
+                    return
+                  }
+                  
                   if (!["jpg", "jpeg", "png"].includes(file.name.split(".")[1])){
                     alert("File type incorrect!")
                     return
